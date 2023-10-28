@@ -94,6 +94,59 @@ bool ModuleSceneIntro::Start()
 	ball = App->physics->CreateCircle(300, 100, 25);
 	ball->listener = this;
 
+
+	int x1 = 150;
+	int y1 = 700;
+
+	int x2 = 295;
+	int y2 = 700;
+
+	int w = 51;
+	int h = 10;
+
+	// --- Left flipper ---
+	flipperLeft = App->physics->CreateRectangle(x1, y1, w, h);
+	flipperLeftPoint = App->physics->CreateCircle(x1, y2, 2);
+	flipperLeftPoint->body->SetType(b2_staticBody);
+
+	// Flipper Joint (flipper rectangle x flipper circle to give it some movement)
+	b2RevoluteJointDef flipperLeftJoint;
+
+	flipperLeftJoint.bodyA = flipperLeft->body;
+	flipperLeftJoint.bodyB = flipperLeftPoint->body;
+	flipperLeftJoint.referenceAngle = 0 * DEGTORAD;
+	flipperLeftJoint.enableLimit = true;
+	flipperLeftJoint.lowerAngle = -30 * DEGTORAD;
+	flipperLeftJoint.upperAngle = 30 * DEGTORAD;
+	flipperLeftJoint.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
+	flipperLeftJoint.localAnchorB.Set(0, 0);
+	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&flipperLeftJoint);
+	
+
+	// --- Right flipper ---
+	flipperRight = App->physics->CreateRectangle(x2, y2, w, h);
+	flipperRightPoint = App->physics->CreateCircle(x2, y2, 2);
+	flipperRightPoint->body->SetType(b2_staticBody);
+
+	// Flipper Joint
+	b2RevoluteJointDef flipperRightJoint;
+
+	flipperRightJoint.bodyA = flipperRight->body;
+	flipperRightJoint.bodyB = flipperRightPoint->body;
+	flipperRightJoint.referenceAngle = 0 * DEGTORAD;
+	flipperRightJoint.enableLimit = true;
+	flipperRightJoint.lowerAngle = -30 * DEGTORAD;
+	flipperRightJoint.upperAngle = 30 * DEGTORAD;
+	flipperRightJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
+	flipperRightJoint.localAnchorB.Set(0, 0);
+	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&flipperRightJoint);
+
+	// Get texture
+	flipper = App->textures->Load("pinball/sprites/flipper.png");
+	flipper2 = App->textures->Load("pinball/sprites/flipper2.png");
+
+
+
 	return ret;
 }
 
@@ -101,6 +154,10 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
+	App->physics->GetWorld()->DestroyBody(flipperLeft->body);
+	App->physics->GetWorld()->DestroyBody(flipperRight->body);
+	App->physics->GetWorld()->DestroyBody(flipperLeftPoint->body);
+	App->physics->GetWorld()->DestroyBody(flipperRightPoint->body);
 
 	return true;
 }
@@ -226,6 +283,13 @@ update_status ModuleSceneIntro::Update()
 	//	if(normal.x != 0.0f)
 	//		App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	//}
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
+		flipperLeft->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
+		flipperRight->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
+	}
 
 	App->renderer->Blit(background_tex, 0, 0);
 

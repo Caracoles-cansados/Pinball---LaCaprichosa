@@ -35,4 +35,13 @@ public:
 
 	PhysBody* ball;
 
+	// Flippers
+	PhysBody* flipperLeft;
+	PhysBody* flipperRight;
+	PhysBody* flipperLeftPoint;
+	PhysBody* flipperRightPoint;
+	int flipperforce;
+	SDL_Texture* flipper;
+	SDL_Texture* flipper2;
+
 };
