@@ -17,6 +17,10 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+
+	void CreateTerrain();
+	void CreateObjects();
+
 public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
@@ -36,11 +40,11 @@ public:
 	PhysBody* ball;
 
 	// Flippers
-	PhysBody* flipperLeft;
-	PhysBody* flipperRight;
-	PhysBody* flipperLeftPoint;
-	PhysBody* flipperRightPoint;
-	int flipperforce;
+	PhysBody* bateadorIzquierdo;
+	PhysBody* bateadorDerecho;
+	PhysBody* bateadorIzquierdoPoint;
+	PhysBody* bateadorDerechoPoint;
+	int fuerzaBateador = -200;
 	SDL_Texture* flipper;
 	SDL_Texture* flipper2;
 

@@ -36,114 +36,16 @@ bool ModuleSceneIntro::Start()
 
 
 	// Pivot 0, 0
-	int background[98] = {
-		666, 897,
-		665, 2,
-		3, 3,
-		1, 897,
-		225, 898,
-		225, 875,
-		48, 767,
-		29, 738,
-		28, 572,
-		47, 558,
-		47, 544,
-		21, 518,
-		81, 425,
-		27, 346,
-		25, 267,
-		49, 189,
-		87, 135,
-		132, 100,
-		199, 67,
-		280, 48,
-		382, 45,
-		456, 51,
-		518, 61,
-		610, 118,
-		640, 180,
-		642, 297,
-		641, 427,
-		644, 497,
-		641, 585,
-		643, 671,
-		643, 761,
-		644, 819,
-		630, 834,
-		610, 830,
-		604, 812,
-		605, 739,
-		605, 579,
-		604, 500,
-		547, 545,
-		551, 576,
-		584, 596,
-		592, 612,
-		591, 750,
-		568, 770,
-		484, 821,
-		409, 861,
-		397, 876,
-		399, 894,
-		652, 897
-	};
-
-	App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), background, 98, b2_staticBody);
+	
 
 
 	ball = App->physics->CreateCircle(300, 100, 25);
 	ball->listener = this;
 
 
-	int x1 = 150;
-	int y1 = 700;
-
-	int x2 = 295;
-	int y2 = 700;
-
-	int w = 51;
-	int h = 10;
-
-	// --- Left flipper ---
-	flipperLeft = App->physics->CreateRectangle(x1, y1, w, h);
-	flipperLeftPoint = App->physics->CreateCircle(x1, y2, 2);
-	flipperLeftPoint->body->SetType(b2_staticBody);
-
-	// Flipper Joint (flipper rectangle x flipper circle to give it some movement)
-	b2RevoluteJointDef flipperLeftJoint;
-
-	flipperLeftJoint.bodyA = flipperLeft->body;
-	flipperLeftJoint.bodyB = flipperLeftPoint->body;
-	flipperLeftJoint.referenceAngle = 0 * DEGTORAD;
-	flipperLeftJoint.enableLimit = true;
-	flipperLeftJoint.lowerAngle = -30 * DEGTORAD;
-	flipperLeftJoint.upperAngle = 30 * DEGTORAD;
-	flipperLeftJoint.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
-	flipperLeftJoint.localAnchorB.Set(0, 0);
-	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&flipperLeftJoint);
 	
-
-	// --- Right flipper ---
-	flipperRight = App->physics->CreateRectangle(x2, y2, w, h);
-	flipperRightPoint = App->physics->CreateCircle(x2, y2, 2);
-	flipperRightPoint->body->SetType(b2_staticBody);
-
-	// Flipper Joint
-	b2RevoluteJointDef flipperRightJoint;
-
-	flipperRightJoint.bodyA = flipperRight->body;
-	flipperRightJoint.bodyB = flipperRightPoint->body;
-	flipperRightJoint.referenceAngle = 0 * DEGTORAD;
-	flipperRightJoint.enableLimit = true;
-	flipperRightJoint.lowerAngle = -30 * DEGTORAD;
-	flipperRightJoint.upperAngle = 30 * DEGTORAD;
-	flipperRightJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
-	flipperRightJoint.localAnchorB.Set(0, 0);
-	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&flipperRightJoint);
-
-	// Get texture
-	flipper = App->textures->Load("pinball/sprites/flipper.png");
-	flipper2 = App->textures->Load("pinball/sprites/flipper2.png");
+	CreateTerrain();
+	CreateObjects();
 
 
 
@@ -154,10 +56,10 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
-	App->physics->GetWorld()->DestroyBody(flipperLeft->body);
-	App->physics->GetWorld()->DestroyBody(flipperRight->body);
-	App->physics->GetWorld()->DestroyBody(flipperLeftPoint->body);
-	App->physics->GetWorld()->DestroyBody(flipperRightPoint->body);
+	App->physics->GetWorld()->DestroyBody(bateadorIzquierdo->body);
+	App->physics->GetWorld()->DestroyBody(bateadorDerecho->body);
+	App->physics->GetWorld()->DestroyBody(bateadorIzquierdoPoint->body);
+	App->physics->GetWorld()->DestroyBody(bateadorDerechoPoint->body);
 
 	return true;
 }
@@ -285,10 +187,10 @@ update_status ModuleSceneIntro::Update()
 	//}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-		flipperLeft->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
+		bateadorIzquierdo->body->ApplyForceToCenter(b2Vec2(0, fuerzaBateador), 1);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-		flipperRight->body->ApplyForceToCenter(b2Vec2(0, flipperforce), 1);
+		bateadorDerecho->body->ApplyForceToCenter(b2Vec2(0, fuerzaBateador), 1);
 	}
 
 	App->renderer->Blit(background_tex, 0, 0);
@@ -314,4 +216,147 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}*/
+}
+
+void ModuleSceneIntro::CreateTerrain()
+{
+
+	int background[98] = {
+		666, 897,
+		665, 2,
+		3, 3,
+		1, 897,
+		225, 898,
+		225, 875,
+		48, 767,
+		29, 738,
+		28, 572,
+		47, 558,
+		47, 544,
+		21, 518,
+		81, 425,
+		27, 346,
+		25, 267,
+		49, 189,
+		87, 135,
+		132, 100,
+		199, 67,
+		280, 48,
+		382, 45,
+		456, 51,
+		518, 61,
+		610, 118,
+		640, 180,
+		642, 297,
+		641, 427,
+		644, 497,
+		641, 585,
+		643, 671,
+		643, 761,
+		644, 819,
+		630, 834,
+		610, 830,
+		604, 812,
+		605, 739,
+		605, 579,
+		604, 500,
+		547, 545,
+		551, 576,
+		584, 596,
+		592, 612,
+		591, 750,
+		568, 770,
+		484, 821,
+		409, 861,
+		397, 876,
+		399, 894,
+		652, 897
+	};
+	App->physics->CreateChain(0, 0, background, 98, b2_staticBody);
+
+
+	int leftThing[18] = {
+		213, 801,
+		201, 814,
+		79, 739,
+		68, 720,
+		66, 635,
+		78, 629,
+		97, 640,
+		94, 726,
+		202, 794
+	};
+	App->physics->CreateChain(0, 0, leftThing, 18, b2_staticBody);
+
+	int rightThing[22] = {
+	421, 818,
+	410, 803,
+	529, 731,
+	524, 642,
+	547, 627,
+	557, 634,
+	560, 663,
+	558, 715,
+	548, 736,
+	527, 751,
+	430, 813
+	};
+
+	App->physics->CreateChain(0, 0, rightThing, 18, b2_staticBody);
+}
+
+void ModuleSceneIntro::CreateObjects()
+{
+
+
+	int x1 = 230;
+	int y1 = 810;
+
+	int x2 = 410;
+	int y2 = 810;
+
+	int w = 70;
+	int h = 10;
+
+	// --- Left flipper ---
+	bateadorIzquierdo = App->physics->CreateRectangle(x1, y1, w, h);
+	bateadorIzquierdoPoint = App->physics->CreateCircle(x1, y2, 2);
+	bateadorIzquierdoPoint->body->SetType(b2_staticBody);
+
+	// Flipper Joint (flipper rectangle x flipper circle to give it some movement)
+	b2RevoluteJointDef bateadorIzquierdoJoint;
+
+	bateadorIzquierdoJoint.bodyA = bateadorIzquierdo->body;
+	bateadorIzquierdoJoint.bodyB = bateadorIzquierdoPoint->body;
+	bateadorIzquierdoJoint.referenceAngle = 0 * DEGTORAD;
+	bateadorIzquierdoJoint.enableLimit = true;
+	bateadorIzquierdoJoint.lowerAngle = -30 * DEGTORAD;
+	bateadorIzquierdoJoint.upperAngle = 30 * DEGTORAD;
+	bateadorIzquierdoJoint.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
+	bateadorIzquierdoJoint.localAnchorB.Set(0, 0);
+	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&bateadorIzquierdoJoint);
+
+
+	// --- Right flipper ---
+	bateadorDerecho = App->physics->CreateRectangle(x2, y2, w, h);
+	bateadorDerechoPoint = App->physics->CreateCircle(x2, y2, 2);
+	bateadorDerechoPoint->body->SetType(b2_staticBody);
+
+	// Flipper Joint
+	b2RevoluteJointDef bateadorDerechoJoint;
+
+	bateadorDerechoJoint.bodyA = bateadorDerecho->body;
+	bateadorDerechoJoint.bodyB = bateadorDerechoPoint->body;
+	bateadorDerechoJoint.referenceAngle = 0 * DEGTORAD;
+	bateadorDerechoJoint.enableLimit = true;
+	bateadorDerechoJoint.lowerAngle = -30 * DEGTORAD;
+	bateadorDerechoJoint.upperAngle = 30 * DEGTORAD;
+	bateadorDerechoJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
+	bateadorDerechoJoint.localAnchorB.Set(0, 0);
+	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&bateadorDerechoJoint);
+
+	// Get texture
+	flipper = App->textures->Load("pinball/sprites/flipper.png");
+	flipper2 = App->textures->Load("pinball/sprites/flipper2.png");
+
 }
