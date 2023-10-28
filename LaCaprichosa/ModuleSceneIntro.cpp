@@ -29,48 +29,66 @@ bool ModuleSceneIntro::Start()
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-
+	background_tex = App->textures->Load("textures/background.png");
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 
 
 
-	int points[64] = {
-		14, 36,
-		42, 40,
-		40, 0,
-		75, 30,
-		88, 4,
-		94, 39,
-		111, 36,
-		104, 58,
-		107, 62,
-		117, 67,
-		109, 73,
-		110, 85,
-		106, 91,
-		109, 99,
-		103, 104,
-		100, 115,
-		106, 121,
-		103, 125,
-		98, 126,
-		95, 137,
-		83, 147,
-		67, 147,
-		53, 140,
-		46, 132,
-		34, 136,
-		38, 126,
-		23, 123,
-		30, 114,
-		10, 102,
-		29, 90,
-		0, 75,
-		30, 62
+	// Pivot 0, 0
+	int background[98] = {
+		666, 897,
+		665, 2,
+		3, 3,
+		1, 897,
+		225, 898,
+		225, 875,
+		48, 767,
+		29, 738,
+		28, 572,
+		47, 558,
+		47, 544,
+		21, 518,
+		81, 425,
+		27, 346,
+		25, 267,
+		49, 189,
+		87, 135,
+		132, 100,
+		199, 67,
+		280, 48,
+		382, 45,
+		456, 51,
+		518, 61,
+		610, 118,
+		640, 180,
+		642, 297,
+		641, 427,
+		644, 497,
+		641, 585,
+		643, 671,
+		643, 761,
+		644, 819,
+		630, 834,
+		610, 830,
+		604, 812,
+		605, 739,
+		605, 579,
+		604, 500,
+		547, 545,
+		551, 576,
+		584, 596,
+		592, 612,
+		591, 750,
+		568, 770,
+		484, 821,
+		409, 861,
+		397, 876,
+		399, 894,
+		652, 897
 	};
 
-	App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), points, 64, b2_staticBody);
+	App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), background, 98, b2_staticBody);
 
 
 	ball = App->physics->CreateCircle(300, 100, 25);
@@ -208,6 +226,8 @@ update_status ModuleSceneIntro::Update()
 	//	if(normal.x != 0.0f)
 	//		App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	//}
+
+	App->renderer->Blit(background_tex, 0, 0);
 
 	return UPDATE_CONTINUE;
 }
