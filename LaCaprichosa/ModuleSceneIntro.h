@@ -40,11 +40,11 @@ public:
 	PhysBody* ball;
 
 	// Flippers
-	PhysBody* bateadorIzquierdo;
-	PhysBody* bateadorDerecho;
-	PhysBody* bateadorIzquierdoPoint;
-	PhysBody* bateadorDerechoPoint;
-	int fuerzaBateador = -200;
+	PhysBody* paletaIzquierdo;
+	PhysBody* paletaDerecho;
+	PhysBody* paletaIzquierdoPoint;
+	PhysBody* paletaDerechoPoint;
+	int fuerzaPaleta = -200;
 	SDL_Texture* flipper;
 	SDL_Texture* flipper2;
 
