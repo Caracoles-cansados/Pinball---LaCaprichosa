@@ -39,8 +39,10 @@ bool ModuleSceneIntro::Start()
 	
 
 
-	ball = App->physics->CreateCircle(300, 100, 25);
+	ball = App->physics->CreateCircle(624, 700, 15);
 	ball->listener = this;
+	
+	
 
 
 	
@@ -193,7 +195,27 @@ update_status ModuleSceneIntro::Update()
 		paletaDerecho->body->ApplyForceToCenter(b2Vec2(0, fuerzaPaleta), 1);
 	}
 
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
+		//paletaInicio->body->ApplyForceToCenter(b2Vec2(0, fuerzaPaleta), 1);
+		
+		
+		if (springForce < 900) {
+			springForce += 10;
+
+		}
+		muelleInicio->body->ApplyForceToCenter(b2Vec2(0, springForce), 1);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
+		springForce = 0;
+	}
 	App->renderer->Blit(background_tex, 0, 0);
+
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		ball = App->physics->CreateCircle(624, 700, 15);
+		ball->listener = this;
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -303,6 +325,13 @@ void ModuleSceneIntro::CreateTerrain()
 	};
 
 	App->physics->CreateChain(0, 0, rightThing, 18, b2_staticBody);
+
+
+
+
+	
+
+
 }
 
 void ModuleSceneIntro::CreateObjects()
@@ -317,6 +346,31 @@ void ModuleSceneIntro::CreateObjects()
 
 	int w = 70;
 	int h = 10;
+
+
+	//Paleta inicio
+	muelleInicio = App->physics->CreateRectangle(624, 775, 35, 20);
+
+	muelleInicioPoint = App->physics->CreateCircle(624, 830, 2);
+	muelleInicioPoint->body->SetType(b2_staticBody);
+
+	b2DistanceJointDef muelleDef;
+
+	muelleDef.bodyA = muelleInicio->body;
+	muelleDef.bodyB = muelleInicioPoint->body;
+
+	muelleDef.localAnchorA.Set(0, 0);
+	muelleDef.localAnchorB.Set(0, 0);
+
+	muelleDef.length = 1.5f;
+
+	muelleDef.collideConnected = true;
+
+	muelleDef.frequencyHz = 7.0f;
+	muelleDef.dampingRatio = 0.05f;
+
+	b2PrismaticJoint* muelleJoint = (b2PrismaticJoint*)App->physics->GetWorld()->CreateJoint(&muelleDef);
+	
 
 	// --- Left flipper ---
 	paletaIzquierdo = App->physics->CreateRectangle(x1, y1, w, h);

@@ -45,7 +45,13 @@ public:
 	PhysBody* paletaIzquierdoPoint;
 	PhysBody* paletaDerechoPoint;
 	int fuerzaPaleta = -200;
+	int springForce;
 	SDL_Texture* flipper;
 	SDL_Texture* flipper2;
+
+
+	
+	PhysBody* muelleInicio;
+	PhysBody* muelleInicioPoint;
 
 };
