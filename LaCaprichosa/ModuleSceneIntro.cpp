@@ -39,7 +39,7 @@ bool ModuleSceneIntro::Start()
 	
 
 
-	ball = App->physics->CreateCircle(624, 700, 15);
+	ball = App->physics->CreateCircle(672, 700, 15);
 	ball->listener = this;
 	
 	
@@ -213,7 +213,7 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(background_tex, 0, 0);
 
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		ball = App->physics->CreateCircle(624, 700, 15);
+		ball = App->physics->CreateCircle(672, 700, 15);
 		ball->listener = this;
 	}
 
@@ -387,10 +387,51 @@ void ModuleSceneIntro::CreateTerrain()
 
 	App->physics->CreateChain(0, 0, rightThing, 18, b2_staticBody);
 
-
-
-
 	
+	// Pivot 0, 0
+	int cosaderecha[80] = {
+		648, 899,
+		650, 152,
+		641, 114,
+		621, 87,
+		589, 64,
+		561, 49,
+		542, 51,
+		536, 63,
+		534, 83,
+		545, 95,
+		555, 103,
+		568, 112,
+		592, 129,
+		602, 149,
+		605, 180,
+		605, 211,
+		605, 241,
+		602, 267,
+		597, 291,
+		590, 308,
+		577, 322,
+		564, 336,
+		555, 356,
+		550, 372,
+		548, 394,
+		549, 416,
+		550, 435,
+		561, 454,
+		574, 470,
+		584, 485,
+		597, 497,
+		604, 507,
+		618, 525,
+		625, 541,
+		630, 570,
+		635, 596,
+		640, 624,
+		643, 651,
+		644, 678,
+		644, 911
+	};
+	App->physics->CreateChain(0, 0, cosaderecha, 80, b2_staticBody);
 
 
 }
@@ -410,10 +451,10 @@ void ModuleSceneIntro::CreateObjects()
 
 
 	//Paleta inicio
-	muelleInicio = App->physics->CreateRectangle(624, 775, 35, 20);
+	muelleInicio = App->physics->CreateRectangle(673, 775, 30, 20);
 	
 	muelleInicio->body->SetFixedRotation(true);
-	muelleInicioPoint = App->physics->CreateCircle(624, 830, 2);
+	muelleInicioPoint = App->physics->CreateCircle(673, 830, 2);
 	muelleInicioPoint->body->SetType(b2_staticBody);
 
 	b2DistanceJointDef muelleDef;
