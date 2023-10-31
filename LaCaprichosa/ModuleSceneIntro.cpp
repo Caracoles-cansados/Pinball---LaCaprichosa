@@ -39,7 +39,7 @@ bool ModuleSceneIntro::Start()
 	
 
 
-	ball = App->physics->CreateCircle(624, 700, 15);
+	ball = App->physics->CreateCircle(672, 700, 15);
 	ball->listener = this;
 	
 	
@@ -213,7 +213,7 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(background_tex, 0, 0);
 
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
-		ball = App->physics->CreateCircle(624, 700, 15);
+		ball = App->physics->CreateCircle(672, 700, 15);
 		ball->listener = this;
 	}
 
@@ -410,10 +410,10 @@ void ModuleSceneIntro::CreateObjects()
 
 
 	//Paleta inicio
-	muelleInicio = App->physics->CreateRectangle(624, 775, 35, 20);
+	muelleInicio = App->physics->CreateRectangle(673, 775, 30, 20);
 	
 	muelleInicio->body->SetFixedRotation(true);
-	muelleInicioPoint = App->physics->CreateCircle(624, 830, 2);
+	muelleInicioPoint = App->physics->CreateCircle(673, 830, 2);
 	muelleInicioPoint->body->SetType(b2_staticBody);
 
 	b2DistanceJointDef muelleDef;
