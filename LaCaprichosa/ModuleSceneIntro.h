@@ -53,5 +53,8 @@ public:
 	
 	PhysBody* muelleInicio;
 	PhysBody* muelleInicioPoint;
-
+	PhysBody* bola;
+	PhysBody* bola2;
+	PhysBody* bola3;
+	PhysBody* bola4;
 };
