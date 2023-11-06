@@ -616,6 +616,40 @@ void ModuleSceneIntro::CreateTerrain()
 	};
 
 	App->physics->CreateChain(0, 0, cosaabajo, 184, b2_staticBody);
+
+	int champi[60] = {
+	356, 417,
+	333, 416,
+	320, 408,
+	312, 397,
+	311, 382,
+	317, 376,
+	327, 376,
+	336, 380,
+	346, 380,
+	351, 373,
+	351, 363,
+	347, 356,
+	347, 347,
+	352, 340,
+	360, 337,
+	368, 338,
+	375, 347,
+	374, 358,
+	371, 367,
+	371, 376,
+	375, 380,
+	386, 377,
+	395, 376,
+	402, 379,
+	407, 388,
+	407, 394,
+	403, 403,
+	396, 408,
+	382, 413,
+	371, 417
+	};
+	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);
 }
 
 void ModuleSceneIntro::CreateObjects()
