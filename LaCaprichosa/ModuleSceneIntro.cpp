@@ -41,6 +41,7 @@ bool ModuleSceneIntro::Start()
 
 	ball = App->physics->CreateCircle(672, 700, 15);
 	ball->listener = this;
+	ball->type = BALL;
 	
 	
 
@@ -215,6 +216,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		ball = App->physics->CreateCircle(672, 700, 15);
 		ball->listener = this;
+		ball->type = BALL;
 	}
 
 	return UPDATE_CONTINUE;
@@ -238,6 +240,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}*/
+	
+	if ((bodyA->type == BALL && bodyB->type == RESETBALL) || (bodyA->type == RESETBALL  && bodyB->type == BALL)) {
+		LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+		delete ball;
+
+		ball = App->physics->CreateCircle(672, 700, 15);
+		ball->listener = this;
+		ball->type = BALL;
+	}
+
+
 }
 
 void ModuleSceneIntro::CreateTerrain()
@@ -653,6 +667,11 @@ void ModuleSceneIntro::CreateTerrain()
 	App->physics->CreateChain(0, 0, cosaAbajoIzquierdaIzquierda, 94, b2_staticBody);*/
 
 
+
+	PhysBody* colisionPerder = App->physics->CreateRectangle(450, 450, 900, 20, b2_staticBody);
+	colisionPerder->type = RESETBALL;
+	colisionPerder->listener = this;
+
 }
 
 void ModuleSceneIntro::CreateObjects()
@@ -760,3 +779,7 @@ void ModuleSceneIntro::CreateObjects()
 	flipper2 = App->textures->Load("pinball/sprites/flipper2.png");
 
 }
+
+
+
+
