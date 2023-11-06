@@ -646,7 +646,7 @@ void ModuleSceneIntro::CreateObjects()
 
 
 
-	bola = App->physics->CreateBolas(200, 150, 16);
+	bola = App->physics->CreateBolas(200, 150, 14);
 	bola->body->SetType(b2_staticBody);
 	bola->body->SetFixedRotation(true);
 	
@@ -692,12 +692,12 @@ void ModuleSceneIntro::CreateObjects()
 	
 
 	int x1 = 200;
-	int y1 = 720;
+	int y1 = 800;
 
-	int x2 = 460;
-	int y2 = 810;
+	int x2 = 500;
+	int y2 = 800;
 
-	int w = 130;
+	int w = 148;
 	int h = 20;
 
 	// --- Left flipper ---
@@ -733,7 +733,7 @@ void ModuleSceneIntro::CreateObjects()
 	paletaDerechoJoint.enableLimit = true;
 	paletaDerechoJoint.lowerAngle = -30 * DEGTORAD;
 	paletaDerechoJoint.upperAngle = 30 * DEGTORAD;
-	paletaDerechoJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
+	paletaDerechoJoint.localAnchorA.Set(PIXEL_TO_METERS(50), 0);
 	paletaDerechoJoint.localAnchorB.Set(0, 0);
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&paletaDerechoJoint);
 

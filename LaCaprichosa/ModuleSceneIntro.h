@@ -45,7 +45,7 @@ public:
 	PhysBody* paletaDerecho;
 	PhysBody* paletaIzquierdoPoint;
 	PhysBody* paletaDerechoPoint;
-	int fuerzaPaleta = -200;
+	int fuerzaPaleta = -600;
 	int springForce;
 	SDL_Texture* flipper;
 	SDL_Texture* flipper2;
