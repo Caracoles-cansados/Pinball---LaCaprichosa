@@ -358,7 +358,7 @@ void ModuleSceneIntro::CreateTerrain()
 
 
 
-	int leftThing[18] = {
+	/*int leftThing[18] = {
 		213, 801,
 		201, 814,
 		79, 739,
@@ -385,7 +385,7 @@ void ModuleSceneIntro::CreateTerrain()
 	430, 813
 	};
 
-	App->physics->CreateChain(0, 0, rightThing, 18, b2_staticBody);
+	App->physics->CreateChain(0, 0, rightThing, 18, b2_staticBody);*/
 
 	
 	// Pivot 0, 0
@@ -520,20 +520,146 @@ void ModuleSceneIntro::CreateTerrain()
 	};
 	App->physics->CreateChain(0, 0, cosaizquierda, 94, b2_staticBody);
 
+	int cosaabajoizquierdaderecha[58] = {
+	141, 686,
+	139, 676,
+	140, 667,
+	148, 667,
+	154, 669,
+	158, 680,
+	158, 692,
+	162, 698,
+	168, 703,
+	174, 709,
+	181, 711,
+	187, 715,
+	195, 717,
+	197, 723,
+	201, 730,
+	194, 735,
+	185, 738,
+	176, 740,
+	166, 744,
+	159, 751,
+	155, 759,
+	153, 768,
+	152, 782,
+	153, 790,
+	156, 799,
+	255, 899,
+	243, 900,
+	146, 803,
+	143, 793
+	};
+	App->physics->CreateChain(0, 0, cosaabajoizquierdaderecha, 58, b2_staticBody);
+
+	int cosaabajoizquierdaizquierda[52] = {
+	121, 623,
+	137, 601,
+	143, 596,
+	150, 594,
+	154, 597,
+	153, 604,
+	146, 610,
+	133, 621,
+	120, 632,
+	107, 647,
+	103, 655,
+	102, 668,
+	101, 780,
+	103, 798,
+	109, 803,
+	117, 812,
+	205, 899,
+	205, 905,
+	192, 898,
+	96, 802,
+	94, 792,
+	94, 782,
+	95, 647,
+	101, 640,
+	112, 632,
+	117, 626
+	};
+	App->physics->CreateChain(0, 0, cosaabajoizquierdaizquierda, 52, b2_staticBody);
+
+	int cosaabajoderecha[70] = {
+555, 547,
+546, 537,
+540, 541,
+539, 550,
+547, 555,
+566, 572,
+571, 580,
+579, 587,
+585, 595,
+595, 606,
+597, 620,
+594, 635,
+595, 798,
+587, 805,
+576, 817,
+493, 903,
+456, 912,
+452, 902,
+452, 895,
+547, 802,
+552, 793,
+550, 631,
+550, 620,
+545, 620,
+540, 626,
+539, 633,
+540, 794,
+441, 897,
+437, 929,
+455, 936,
+493, 922,
+505, 897,
+598, 802,
+601, 794,
+603, 598
+	};
+	App->physics->CreateChain(0, 0, cosaabajoderecha, 70, b2_staticBody);
+
+
+
+	/*int cosaAbajoIzquierdaIzquierda[48] = {
+	144, 600,
+	153, 594,
+	164, 597,
+	161, 605,
+	155, 610,
+	145, 611,
+	134, 619,
+	121, 630,
+	110, 645,
+	105, 656,
+	103, 690,
+	102, 720,
+	101, 762,
+	102, 782,
+	102, 792,
+	105, 800,
+	116, 810,
+	124, 816,
+	198, 894,
+	200, 900,
+	186, 901,
+	94, 803,
+	92, 792,
+	95, 648
+	};
+	App->physics->CreateChain(0, 0, cosaAbajoIzquierdaIzquierda, 94, b2_staticBody);*/
+
+
 }
 
 void ModuleSceneIntro::CreateObjects()
 {
 
 
-	int x1 = 230;
-	int y1 = 810;
 
-	int x2 = 410;
-	int y2 = 810;
-
-	int w = 70;
-	int h = 10;
 
 
 
@@ -583,6 +709,15 @@ void ModuleSceneIntro::CreateObjects()
 	b2PrismaticJoint* muelleJoint = (b2PrismaticJoint*)App->physics->GetWorld()->CreateJoint(&muelleDef);
 	
 
+	int x1 = 200;
+	int y1 = 720;
+
+	int x2 = 460;
+	int y2 = 810;
+
+	int w = 130;
+	int h = 20;
+
 	// --- Left flipper ---
 	paletaIzquierdo = App->physics->CreateRectangle(x1, y1, w, h);
 	paletaIzquierdoPoint = App->physics->CreateCircle(x1, y2, 2);
@@ -597,7 +732,7 @@ void ModuleSceneIntro::CreateObjects()
 	paletaIzquierdoJoint.enableLimit = true;
 	paletaIzquierdoJoint.lowerAngle = -30 * DEGTORAD;
 	paletaIzquierdoJoint.upperAngle = 30 * DEGTORAD;
-	paletaIzquierdoJoint.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
+	paletaIzquierdoJoint.localAnchorA.Set(PIXEL_TO_METERS(-50), 0);
 	paletaIzquierdoJoint.localAnchorB.Set(0, 0);
 	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&paletaIzquierdoJoint);
 
