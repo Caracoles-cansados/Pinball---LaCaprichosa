@@ -520,6 +520,69 @@ void ModuleSceneIntro::CreateTerrain()
 	};
 	App->physics->CreateChain(0, 0, cosaizquierda, 94, b2_staticBody);
 
+	int cosaabajoizquierdaderecha[58] = {
+	141, 686,
+	139, 676,
+	140, 667,
+	148, 667,
+	154, 669,
+	158, 680,
+	158, 692,
+	162, 698,
+	168, 703,
+	174, 709,
+	181, 711,
+	187, 715,
+	195, 717,
+	197, 723,
+	201, 730,
+	194, 735,
+	185, 738,
+	176, 740,
+	166, 744,
+	159, 751,
+	155, 759,
+	153, 768,
+	152, 782,
+	153, 790,
+	156, 799,
+	255, 899,
+	243, 900,
+	146, 803,
+	143, 793
+	};
+	App->physics->CreateChain(0, 0, cosaabajoizquierdaderecha, 58, b2_staticBody);
+
+	int cosaabajoizquierdaizquierda[52] = {
+	121, 623,
+	137, 601,
+	143, 596,
+	150, 594,
+	154, 597,
+	153, 604,
+	146, 610,
+	133, 621,
+	120, 632,
+	107, 647,
+	103, 655,
+	102, 668,
+	101, 780,
+	103, 798,
+	109, 803,
+	117, 812,
+	205, 899,
+	205, 905,
+	192, 898,
+	96, 802,
+	94, 792,
+	94, 782,
+	95, 647,
+	101, 640,
+	112, 632,
+	117, 626
+	};
+	App->physics->CreateChain(0, 0, cosaabajoizquierdaizquierda, 52, b2_staticBody);
+
 
 
 
@@ -603,8 +666,8 @@ void ModuleSceneIntro::CreateObjects()
 	b2PrismaticJoint* muelleJoint = (b2PrismaticJoint*)App->physics->GetWorld()->CreateJoint(&muelleDef);
 	
 
-	int x1 = 180;
-	int y1 = 750;
+	int x1 = 200;
+	int y1 = 720;
 
 	int x2 = 460;
 	int y2 = 810;
