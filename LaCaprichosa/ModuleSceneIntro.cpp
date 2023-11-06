@@ -639,7 +639,43 @@ void ModuleSceneIntro::CreateTerrain()
 
 	App->physics->CreateChain(0, 0, cosaabajo, 184, b2_staticBody);
 
+	//Para el reset de la bola
 	PhysBody* colisionPerder = App->physics->CreateRectangleSensor(450, 910, 900, 20);
+
+
+	int champi[60] = {
+	356, 417,
+	333, 416,
+	320, 408,
+	312, 397,
+	311, 382,
+	317, 376,
+	327, 376,
+	336, 380,
+	346, 380,
+	351, 373,
+	351, 363,
+	347, 356,
+	347, 347,
+	352, 340,
+	360, 337,
+	368, 338,
+	375, 347,
+	374, 358,
+	371, 367,
+	371, 376,
+	375, 380,
+	386, 377,
+	395, 376,
+	402, 379,
+	407, 388,
+	407, 394,
+	403, 403,
+	396, 408,
+	382, 413,
+	371, 417
+	};
+	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);
 	colisionPerder->type = RESETBALL;
 	colisionPerder->listener = this;
 
@@ -654,7 +690,7 @@ void ModuleSceneIntro::CreateObjects()
 
 
 
-	bola = App->physics->CreateBolas(200, 150, 16);
+	bola = App->physics->CreateBolas(200, 150, 14);
 	bola->body->SetType(b2_staticBody);
 	bola->body->SetFixedRotation(true);
 	
@@ -700,12 +736,12 @@ void ModuleSceneIntro::CreateObjects()
 	
 
 	int x1 = 200;
-	int y1 = 720;
+	int y1 = 800;
 
-	int x2 = 460;
-	int y2 = 810;
+	int x2 = 500;
+	int y2 = 800;
 
-	int w = 130;
+	int w = 148;
 	int h = 20;
 
 	// --- Left flipper ---
@@ -741,7 +777,7 @@ void ModuleSceneIntro::CreateObjects()
 	paletaDerechoJoint.enableLimit = true;
 	paletaDerechoJoint.lowerAngle = -30 * DEGTORAD;
 	paletaDerechoJoint.upperAngle = 30 * DEGTORAD;
-	paletaDerechoJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
+	paletaDerechoJoint.localAnchorA.Set(PIXEL_TO_METERS(50), 0);
 	paletaDerechoJoint.localAnchorB.Set(0, 0);
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&paletaDerechoJoint);
 
