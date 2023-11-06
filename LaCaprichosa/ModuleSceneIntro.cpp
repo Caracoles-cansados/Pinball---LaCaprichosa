@@ -367,7 +367,7 @@ void ModuleSceneIntro::CreateTerrain()
 		78, 629,
 		97, 640,
 		94, 726,
-		102, 794
+		202, 794
 	};
 	App->physics->CreateChain(0, 0, leftThing, 18, b2_staticBody);
 
@@ -536,19 +536,24 @@ void ModuleSceneIntro::CreateObjects()
 	int h = 10;
 
 
-	bola = App->physics->CreateCircle(200, 150, 16);
+
+
+	bola = App->physics->CreateBolas(200, 150, 16);
 	bola->body->SetType(b2_staticBody);
 	bola->body->SetFixedRotation(true);
 	
-	bola2 = App->physics->CreateCircle(500, 150, 16);
+
+
+
+	bola2 = App->physics->CreateBolas(500, 150, 16);
 	bola2->body->SetType(b2_staticBody);
 	bola2->body->SetFixedRotation(true);
 
-	bola3 = App->physics->CreateCircle(550, 250, 16);
+	bola3 = App->physics->CreateBolas(550, 250, 16);
 	bola3->body->SetType(b2_staticBody);
 	bola3->body->SetFixedRotation(true);
 
-	bola4 = App->physics->CreateCircle(450, 300, 16);
+	bola4 = App->physics->CreateBolas(450, 300, 16);
 	bola4->body->SetType(b2_staticBody);
 	bola4->body->SetFixedRotation(true);
 
