@@ -711,7 +711,7 @@ void ModuleSceneIntro::CreateObjects()
 
 
 	//Paleta inicio
-	muelleInicio = App->physics->CreateRectangle(673, 775, 30, 20);
+	muelleInicio = App->physics->CreateRectangle(673, 775, 50, 20);
 	
 	muelleInicio->body->SetFixedRotation(true);
 	muelleInicioPoint = App->physics->CreateCircle(673, 830, 2);
