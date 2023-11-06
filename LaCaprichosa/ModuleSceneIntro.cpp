@@ -213,7 +213,12 @@ update_status ModuleSceneIntro::Update()
 	}
 	App->renderer->Blit(background_tex, 0, 0);
 
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || crearBola) {
+		crearBola = false;
+
+		ball->body->GetWorld()->DestroyBody(ball->body);
+		delete ball;
+
 		ball = App->physics->CreateCircle(672, 700, 15);
 		ball->listener = this;
 		ball->type = BALL;
@@ -244,12 +249,15 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if ((bodyA->type == BALL && bodyB->type == RESETBALL) || (bodyA->type == RESETBALL  && bodyB->type == BALL)) {
 		LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-		delete ball;
+		crearBola = true;
 
-		ball = App->physics->CreateCircle(672, 700, 15);
+		//ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(672), PIXEL_TO_METERS(700)), 0);
+
+	/*	ball = App->physics->CreateCircle(672, 700, 15);
 		ball->listener = this;
-		ball->type = BALL;
+		ball->type = BALL;*/
 	}
+
 
 
 }
@@ -631,7 +639,7 @@ void ModuleSceneIntro::CreateTerrain()
 
 	App->physics->CreateChain(0, 0, cosaabajo, 184, b2_staticBody);
 
-	PhysBody* colisionPerder = App->physics->CreateRectangle(450, 450, 900, 20, b2_staticBody);
+	PhysBody* colisionPerder = App->physics->CreateRectangleSensor(450, 910, 900, 20);
 	colisionPerder->type = RESETBALL;
 	colisionPerder->listener = this;
 

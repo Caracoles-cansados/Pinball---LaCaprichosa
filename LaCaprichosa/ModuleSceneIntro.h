@@ -58,4 +58,7 @@ public:
 	PhysBody* bola2;
 	PhysBody* bola3;
 	PhysBody* bola4;
+
+
+	bool crearBola = false;
 };
