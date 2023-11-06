@@ -358,7 +358,7 @@ void ModuleSceneIntro::CreateTerrain()
 
 
 
-	int leftThing[18] = {
+	/*int leftThing[18] = {
 		213, 801,
 		201, 814,
 		79, 739,
@@ -385,7 +385,7 @@ void ModuleSceneIntro::CreateTerrain()
 	430, 813
 	};
 
-	App->physics->CreateChain(0, 0, rightThing, 18, b2_staticBody);
+	App->physics->CreateChain(0, 0, rightThing, 18, b2_staticBody);*/
 
 	
 	// Pivot 0, 0
@@ -520,20 +520,45 @@ void ModuleSceneIntro::CreateTerrain()
 	};
 	App->physics->CreateChain(0, 0, cosaizquierda, 94, b2_staticBody);
 
+
+
+
+	/*int cosaAbajoIzquierdaIzquierda[48] = {
+	144, 600,
+	153, 594,
+	164, 597,
+	161, 605,
+	155, 610,
+	145, 611,
+	134, 619,
+	121, 630,
+	110, 645,
+	105, 656,
+	103, 690,
+	102, 720,
+	101, 762,
+	102, 782,
+	102, 792,
+	105, 800,
+	116, 810,
+	124, 816,
+	198, 894,
+	200, 900,
+	186, 901,
+	94, 803,
+	92, 792,
+	95, 648
+	};
+	App->physics->CreateChain(0, 0, cosaAbajoIzquierdaIzquierda, 94, b2_staticBody);*/
+
+
 }
 
 void ModuleSceneIntro::CreateObjects()
 {
 
 
-	int x1 = 230;
-	int y1 = 810;
 
-	int x2 = 410;
-	int y2 = 810;
-
-	int w = 70;
-	int h = 10;
 
 
 	bola = App->physics->CreateCircle(200, 150, 16);
@@ -578,6 +603,15 @@ void ModuleSceneIntro::CreateObjects()
 	b2PrismaticJoint* muelleJoint = (b2PrismaticJoint*)App->physics->GetWorld()->CreateJoint(&muelleDef);
 	
 
+	int x1 = 180;
+	int y1 = 750;
+
+	int x2 = 460;
+	int y2 = 810;
+
+	int w = 130;
+	int h = 20;
+
 	// --- Left flipper ---
 	paletaIzquierdo = App->physics->CreateRectangle(x1, y1, w, h);
 	paletaIzquierdoPoint = App->physics->CreateCircle(x1, y2, 2);
@@ -592,7 +626,7 @@ void ModuleSceneIntro::CreateObjects()
 	paletaIzquierdoJoint.enableLimit = true;
 	paletaIzquierdoJoint.lowerAngle = -30 * DEGTORAD;
 	paletaIzquierdoJoint.upperAngle = 30 * DEGTORAD;
-	paletaIzquierdoJoint.localAnchorA.Set(PIXEL_TO_METERS(-33), 0);
+	paletaIzquierdoJoint.localAnchorA.Set(PIXEL_TO_METERS(-50), 0);
 	paletaIzquierdoJoint.localAnchorB.Set(0, 0);
 	b2RevoluteJoint* joint_leftFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&paletaIzquierdoJoint);
 
