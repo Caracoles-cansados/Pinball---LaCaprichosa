@@ -631,7 +631,7 @@ void ModuleSceneIntro::CreateTerrain()
 
 	App->physics->CreateChain(0, 0, cosaabajo, 184, b2_staticBody);
 
-<<<<<<< HEAD
+
 	int champi[60] = {
 	356, 417,
 	333, 416,
@@ -665,12 +665,11 @@ void ModuleSceneIntro::CreateTerrain()
 	371, 417
 	};
 	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);
-=======
+
 	PhysBody* colisionPerder = App->physics->CreateRectangle(450, 450, 900, 20, b2_staticBody);
 	colisionPerder->type = RESETBALL;
 	colisionPerder->listener = this;
 
->>>>>>> 5b2ed2e8092bce2606d981b2eae65796dbb2b952
 }
 
 void ModuleSceneIntro::CreateObjects()
