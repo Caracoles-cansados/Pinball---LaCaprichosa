@@ -216,6 +216,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		ball = App->physics->CreateCircle(672, 700, 15);
 		ball->listener = this;
+		ball->type = BALL;
 	}
 
 	return UPDATE_CONTINUE;
