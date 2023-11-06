@@ -553,35 +553,20 @@ void ModuleSceneIntro::CreateTerrain()
 	};
 	App->physics->CreateChain(0, 0, cosaabajoizquierdaderecha, 58, b2_staticBody);
 
-	int cosaabajoizquierdaizquierda[52] = {
-	121, 623,
-	137, 601,
-	143, 596,
-	150, 594,
-	154, 597,
-	153, 604,
-	146, 610,
-	133, 621,
-	120, 632,
-	107, 647,
-	103, 655,
-	102, 668,
-	101, 780,
-	103, 798,
-	109, 803,
-	117, 812,
-	205, 899,
-	205, 905,
-	192, 898,
-	96, 802,
-	94, 792,
-	94, 782,
-	95, 647,
-	101, 640,
-	112, 632,
-	117, 626
+	int cosaabajoizquierdaizquierda[22] = {
+	145, 709,
+	143, 686,
+	144, 675,
+	150, 673,
+	155, 679,
+	154, 690,
+	154, 797,
+	256, 900,
+	243, 899,
+	146, 802,
+	145, 717
 	};
-	App->physics->CreateChain(0, 0, cosaabajoizquierdaizquierda, 52, b2_staticBody);
+	App->physics->CreateChain(0, 0, cosaabajoizquierdaizquierda, 22, b2_staticBody);
 
 	int cosaabajoderecha[70] = {
 555, 547,
