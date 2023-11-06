@@ -41,6 +41,7 @@ bool ModuleSceneIntro::Start()
 
 	ball = App->physics->CreateCircle(672, 700, 15);
 	ball->listener = this;
+	ball->type = BALL;
 	
 	
 
@@ -238,6 +239,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}*/
+	
+	if ((bodyA->type == BALL && bodyB->type == RESETBALL) || (bodyA->type == RESETBALL  && bodyB->type == BALL)) {
+		LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+		delete ball;
+
+		ball = App->physics->CreateCircle(672, 700, 15);
+		ball->listener = this;
+		ball->type = BALL;
+	}
+
+
 }
 
 void ModuleSceneIntro::CreateTerrain()
@@ -617,6 +630,7 @@ void ModuleSceneIntro::CreateTerrain()
 
 	App->physics->CreateChain(0, 0, cosaabajo, 184, b2_staticBody);
 
+<<<<<<< HEAD
 	int champi[60] = {
 	356, 417,
 	333, 416,
@@ -650,6 +664,12 @@ void ModuleSceneIntro::CreateTerrain()
 	371, 417
 	};
 	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);
+=======
+	PhysBody* colisionPerder = App->physics->CreateRectangle(450, 450, 900, 20, b2_staticBody);
+	colisionPerder->type = RESETBALL;
+	colisionPerder->listener = this;
+
+>>>>>>> 5b2ed2e8092bce2606d981b2eae65796dbb2b952
 }
 
 void ModuleSceneIntro::CreateObjects()
@@ -661,7 +681,7 @@ void ModuleSceneIntro::CreateObjects()
 
 
 
-	bola = App->physics->CreateBolas(200, 150, 16);
+	bola = App->physics->CreateBolas(200, 150, 14);
 	bola->body->SetType(b2_staticBody);
 	bola->body->SetFixedRotation(true);
 	
@@ -707,12 +727,12 @@ void ModuleSceneIntro::CreateObjects()
 	
 
 	int x1 = 200;
-	int y1 = 720;
+	int y1 = 800;
 
-	int x2 = 460;
-	int y2 = 810;
+	int x2 = 500;
+	int y2 = 800;
 
-	int w = 130;
+	int w = 148;
 	int h = 20;
 
 	// --- Left flipper ---
@@ -748,7 +768,7 @@ void ModuleSceneIntro::CreateObjects()
 	paletaDerechoJoint.enableLimit = true;
 	paletaDerechoJoint.lowerAngle = -30 * DEGTORAD;
 	paletaDerechoJoint.upperAngle = 30 * DEGTORAD;
-	paletaDerechoJoint.localAnchorA.Set(PIXEL_TO_METERS(33), 0);
+	paletaDerechoJoint.localAnchorA.Set(PIXEL_TO_METERS(50), 0);
 	paletaDerechoJoint.localAnchorB.Set(0, 0);
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&paletaDerechoJoint);
 
@@ -757,3 +777,7 @@ void ModuleSceneIntro::CreateObjects()
 	flipper2 = App->textures->Load("pinball/sprites/flipper2.png");
 
 }
+
+
+
+

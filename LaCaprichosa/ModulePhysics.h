@@ -12,9 +12,17 @@
 #define METERS_TO_PIXELS(m) ((int) floor(PIXELS_PER_METER * m))
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
+enum ColisionType {
+	NO_COLLISION = -1,
+	RESETBALL,
+	BALL
+};
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
 {
+
+
+
 public:
 	PhysBody() : listener(NULL), body(NULL)
 	{}
@@ -28,6 +36,7 @@ public:
 	int width, height;
 	b2Body* body;
 	Module* listener;
+	ColisionType type = NO_COLLISION;
 };
 
 // Module --------------------------------------
@@ -44,7 +53,7 @@ public:
 
 	PhysBody* CreateCircle(int x, int y, int radius);
 	PhysBody* CreateBolas(int x, int y, int radius);
-	PhysBody* CreateRectangle(int x, int y, int width, int height);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type = b2BodyType::b2_dynamicBody);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type = b2BodyType::b2_dynamicBody);
 
