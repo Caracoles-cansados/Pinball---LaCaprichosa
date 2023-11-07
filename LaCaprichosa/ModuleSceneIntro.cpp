@@ -81,25 +81,34 @@ update_status ModuleSceneIntro::Update()
 		fuerzaY = y * sin(x + y);
 		ball->body->ApplyForceToCenter(b2Vec2(fuerzaX, fuerzaY), true);*/
 
+		/*int fuerzaX = pow(ball->body->GetLinearVelocity().x, 2) / ruletaR;
+
+		fuerzaX = x * cos(x + y);*/
+
+		//ball->body->ApplyAngularImpulse(-20, true);
+
+		
+
 
 		if (x <= ruletaX) {
-			if (y < ruletaY) {
+			if (y <= ruletaY) {
 				//Esquina arriba izquierda
 				ball->body->ApplyForceToCenter(b2Vec2(ruletaForce, 0), true);
+				
 			}
 			else {
 				//Esquina abajo izquierda
-				ball->body->ApplyForceToCenter(b2Vec2(0, ruletaForce), true);
+				ball->body->ApplyForceToCenter(b2Vec2(0, -ruletaForce), true);
 			}
 		}
 		else {
 			if (y <= ruletaY) {
 				//Esquina arriba derecha
-				ball->body->ApplyForceToCenter(b2Vec2(-ruletaForce, 0), true);
+				ball->body->ApplyForceToCenter(b2Vec2(0, ruletaForce), true);
 			}
 			else {
 				//Esquina abajo derecha
-				ball->body->ApplyForceToCenter(b2Vec2(0, -ruletaForce), true);
+				ball->body->ApplyForceToCenter(b2Vec2(-ruletaForce, 0), true);
 			}
 		}
 
