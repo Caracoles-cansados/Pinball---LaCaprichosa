@@ -30,5 +30,15 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+}
+
+void ModulePlayer::OnExitCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+}
+
+
+
 
 

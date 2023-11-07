@@ -51,7 +51,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	PhysBody* CreateCircle(int x, int y, int radius);
+	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type = b2BodyType::b2_dynamicBody, bool sensor = false);
 	PhysBody* CreateBolas(int x, int y, int radius);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type = b2BodyType::b2_dynamicBody);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
@@ -59,6 +59,8 @@ public:
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
+
+	void EndContact(b2Contact* contact);
 
 	b2World* GetWorld();
 

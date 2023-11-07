@@ -710,7 +710,7 @@ void ModuleSceneIntro::CreateObjects()
 	bola4->body->SetFixedRotation(true);
 
 
-	//Paleta inicio
+	//Muelle inicio
 	muelleInicio = App->physics->CreateRectangle(673, 775, 50, 20);
 	
 	muelleInicio->body->SetFixedRotation(true);
@@ -782,8 +782,19 @@ void ModuleSceneIntro::CreateObjects()
 	b2RevoluteJoint* joint_rightFlipper = (b2RevoluteJoint*)App->physics->GetWorld()->CreateJoint(&paletaDerechoJoint);
 
 	// Get texture
-	flipper = App->textures->Load("pinball/sprites/flipper.png");
-	flipper2 = App->textures->Load("pinball/sprites/flipper2.png");
+	/*flipper = App->textures->Load("pinball/sprites/flipper.png");
+	flipper2 = App->textures->Load("pinball/sprites/flipper2.png");*/
+
+
+
+
+
+
+	circuloTL = App->physics->CreateCircle(350, 600, 150, b2_kinematicBody, true);
+	
+
+
+
 
 }
 

@@ -75,10 +75,10 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, bool sensor)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -89,6 +89,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.restitution = 0.1f;
+	fixture.isSensor = sensor;
 
 	b->CreateFixture(&fixture);
 
@@ -398,6 +399,19 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
 }
+
+void ModulePhysics::EndContact(b2Contact* contact)
+{
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	if (physA && physA->listener != NULL)
+		physA->listener->OnExitCollision(physA, physB);
+
+	if (physB && physB->listener != NULL)
+		physB->listener->OnExitCollision(physB, physA);
+}
+
 
 b2World* ModulePhysics::GetWorld()
 {

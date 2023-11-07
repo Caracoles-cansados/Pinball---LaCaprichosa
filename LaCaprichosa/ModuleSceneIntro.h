@@ -60,5 +60,10 @@ public:
 	PhysBody* bola4;
 
 
+
+
+	PhysBody* circuloTL;
+
+
 	bool crearBola = false;
 };
