@@ -17,6 +17,8 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+	void OnExitCollision(PhysBody* bodyA, PhysBody* bodyB);
+
 
 	void CreateTerrain();
 	void CreateObjects();
@@ -62,8 +64,13 @@ public:
 
 
 
-	PhysBody* circuloTL;
+	PhysBody* circuloGiratorio;
 
 
 	bool crearBola = false;
+	bool estaRotando = false;
+	int ruletaX = 350;
+	int ruletaY = 600;
+	int ruletaR = 150;
+	int ruletaForce = 6;
 };
