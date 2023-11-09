@@ -30,7 +30,8 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	background_tex = App->textures->Load("textures/background.png");
-	pizzaRuleta = App->textures->Load("textures/pizza_rondante.png");
+	pizzaRuleta_tex = App->textures->Load("textures/pizza_rondante.png");
+	bola_tex = App->textures->Load("textures/bola.png");
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 
@@ -71,9 +72,10 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	int posX, posY;
+	ball->GetPosition(posX, posY);
 	if (estaRotando) {
-		int x, y;
-		ball->GetPosition(x, y);
+		
 
 		/*int fuerzaX, fuerzaY;
 
@@ -91,8 +93,8 @@ update_status ModuleSceneIntro::Update()
 		
 
 
-		if (x <= ruletaX) {
-			if (y <= ruletaY) {
+		if (posX <= ruletaX) {
+			if (posY <= ruletaY) {
 				//Esquina arriba izquierda
 				ball->body->ApplyForceToCenter(b2Vec2(ruletaForce, 0), true);
 				
@@ -103,7 +105,7 @@ update_status ModuleSceneIntro::Update()
 			}
 		}
 		else {
-			if (y <= ruletaY) {
+			if (posY <= ruletaY) {
 				//Esquina arriba derecha
 				ball->body->ApplyForceToCenter(b2Vec2(0, ruletaForce), true);
 			}
@@ -153,6 +155,7 @@ update_status ModuleSceneIntro::Update()
 		ball = App->physics->CreateCircle(672, 700, 15);
 		ball->listener = this;
 		ball->type = BALL;
+		ball->body->SetFixedRotation(false);
 	}
 
 
@@ -160,7 +163,9 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(background_tex, 0, 0);
 	SDL_Rect pizzaRect = { 0,0,344,337 };
-	App->renderer->Blit(pizzaRuleta, ruletaX-177, ruletaY - 177, &pizzaRect, 1, ruletaAngle);
+	App->renderer->Blit(pizzaRuleta_tex, ruletaX-177, ruletaY - 177, &pizzaRect, 1, ruletaAngle);
+	SDL_Rect ballRect = { 0,0,32,32};
+	App->renderer->Blit(bola_tex, posX, posY, &ballRect, 1, bola->body->GetTransform().q.GetAngle());
 
 	return UPDATE_CONTINUE;
 }

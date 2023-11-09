@@ -37,7 +37,8 @@ public:
 	SDL_Texture* rick;
 	SDL_Texture* background_tex;
 
-	SDL_Texture* pizzaRuleta;
+	SDL_Texture* pizzaRuleta_tex;
+	SDL_Texture* bola_tex;
 
 	uint bonus_fx;
 	p2Point<int> ray;
