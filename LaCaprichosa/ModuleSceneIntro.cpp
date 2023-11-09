@@ -30,6 +30,7 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	background_tex = App->textures->Load("textures/background.png");
+	pizzaRuleta = App->textures->Load("textures/pizza_rondante.png");
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 
@@ -141,7 +142,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
 		springForce = 0;
 	}
-	App->renderer->Blit(background_tex, 0, 0);
+	
 
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || crearBola) {
 		crearBola = false;
@@ -153,6 +154,13 @@ update_status ModuleSceneIntro::Update()
 		ball->listener = this;
 		ball->type = BALL;
 	}
+
+
+	ruletaAngle += ruletaForce;
+
+	App->renderer->Blit(background_tex, 0, 0);
+	SDL_Rect pizzaRect = { 0,0,344,337 };
+	App->renderer->Blit(pizzaRuleta, ruletaX-177, ruletaY - 177, &pizzaRect, 1, ruletaAngle);
 
 	return UPDATE_CONTINUE;
 }

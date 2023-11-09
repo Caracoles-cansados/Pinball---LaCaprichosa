@@ -36,6 +36,9 @@ public:
 	SDL_Texture* box;
 	SDL_Texture* rick;
 	SDL_Texture* background_tex;
+
+	SDL_Texture* pizzaRuleta;
+
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
@@ -49,8 +52,7 @@ public:
 	PhysBody* paletaDerechoPoint;
 	int fuerzaPaleta = -600;
 	int springForce;
-	SDL_Texture* flipper;
-	SDL_Texture* flipper2;
+	
 
 
 	
@@ -73,4 +75,5 @@ public:
 	int ruletaY = 600;
 	int ruletaR = 150;
 	int ruletaForce = 6;
+	int ruletaAngle = 0;
 };
