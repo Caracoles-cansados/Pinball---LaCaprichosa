@@ -70,124 +70,54 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	//if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	//{
-	//	ray_on = !ray_on;
-	//	ray.x = App->input->GetMouseX();
-	//	ray.y = App->input->GetMouseY();
-	//}
+	if (estaRotando) {
+		int x, y;
+		ball->GetPosition(x, y);
 
-	//if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	//{
-	//	circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
-	//	circles.getLast()->data->listener = this;
-	//}
+		/*int fuerzaX, fuerzaY;
 
-	//if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	//{
-	//	boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
-	//}
 
-	//if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	//{
-	//	// Pivot 0, 0
-	//	int rick_head[64] = {
-	//		14, 36,
-	//		42, 40,
-	//		40, 0,
-	//		75, 30,
-	//		88, 4,
-	//		94, 39,
-	//		111, 36,
-	//		104, 58,
-	//		107, 62,
-	//		117, 67,
-	//		109, 73,
-	//		110, 85,
-	//		106, 91,
-	//		109, 99,
-	//		103, 104,
-	//		100, 115,
-	//		106, 121,
-	//		103, 125,
-	//		98, 126,
-	//		95, 137,
-	//		83, 147,
-	//		67, 147,
-	//		53, 140,
-	//		46, 132,
-	//		34, 136,
-	//		38, 126,
-	//		23, 123,
-	//		30, 114,
-	//		10, 102,
-	//		29, 90,
-	//		0, 75,
-	//		30, 62
-	//	};
+		fuerzaX = x * cos(x + y);
+		fuerzaY = y * sin(x + y);
+		ball->body->ApplyForceToCenter(b2Vec2(fuerzaX, fuerzaY), true);*/
 
-	//	ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
-	//}
+		/*int fuerzaX = pow(ball->body->GetLinearVelocity().x, 2) / ruletaR;
 
-	//// Prepare for raycast ------------------------------------------------------
-	//
-	//iPoint mouse;
-	//mouse.x = App->input->GetMouseX();
-	//mouse.y = App->input->GetMouseY();
-	//int ray_hit = ray.DistanceTo(mouse);
+		fuerzaX = x * cos(x + y);*/
 
-	//fVector normal(0.0f, 0.0f);
+		//ball->body->ApplyAngularImpulse(-20, true);
 
-	//// All draw functions ------------------------------------------------------
-	//p2List_item<PhysBody*>* c = circles.getFirst();
+		
 
-	//while(c != NULL)
-	//{
-	//	int x, y;
-	//	c->data->GetPosition(x, y);
-	//	if(c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
-	//		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
-	//	c = c->next;
-	//}
 
-	//c = boxes.getFirst();
+		if (x <= ruletaX) {
+			if (y <= ruletaY) {
+				//Esquina arriba izquierda
+				ball->body->ApplyForceToCenter(b2Vec2(ruletaForce, 0), true);
+				
+			}
+			else {
+				//Esquina abajo izquierda
+				ball->body->ApplyForceToCenter(b2Vec2(0, -ruletaForce), true);
+			}
+		}
+		else {
+			if (y <= ruletaY) {
+				//Esquina arriba derecha
+				ball->body->ApplyForceToCenter(b2Vec2(0, ruletaForce), true);
+			}
+			else {
+				//Esquina abajo derecha
+				ball->body->ApplyForceToCenter(b2Vec2(-ruletaForce, 0), true);
+			}
+		}
 
-	//while(c != NULL)
-	//{
-	//	int x, y;
-	//	c->data->GetPosition(x, y);
-	//	App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-	//	if(ray_on)
-	//	{
-	//		int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-	//		if(hit >= 0)
-	//			ray_hit = hit;
-	//	}
-	//	c = c->next;
-	//}
 
-	//c = ricks.getFirst();
 
-	//while(c != NULL)
-	//{
-	//	int x, y;
-	//	c->data->GetPosition(x, y);
-	//	App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
-	//	c = c->next;
-	//}
-
-	//// ray -----------------
-	//if(ray_on == true)
-	//{
-	//	fVector destination(mouse.x-ray.x, mouse.y-ray.y);
-	//	destination.Normalize();
-	//	destination *= ray_hit;
-
-	//	App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
-
-	//	if(normal.x != 0.0f)
-	//		App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
-	//}
+	
+	
+	
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
 		paletaIzquierdo->body->ApplyForceToCenter(b2Vec2(0, fuerzaPaleta), 1);
@@ -233,34 +163,30 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	App->audio->PlayFx(bonus_fx);
 
-	/*
-	if(bodyA)
-	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}
-
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
 	
 	if ((bodyA->type == BALL && bodyB->type == RESETBALL) || (bodyA->type == RESETBALL  && bodyB->type == BALL)) {
-		LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
 		crearBola = true;
-
-		//ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(672), PIXEL_TO_METERS(700)), 0);
-
-	/*	ball = App->physics->CreateCircle(672, 700, 15);
-		ball->listener = this;
-		ball->type = BALL;*/
+	}
+	if ((bodyA->type == BALL && bodyB->type == PLATAFORMA_ROTANTE)) {
+		estaRotando = true;
 	}
 
+}
+void ModuleSceneIntro::OnExitCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	int x, y;
 
+	App->audio->PlayFx(bonus_fx);
+
+
+	if ((bodyA->type == BALL && bodyB->type == PLATAFORMA_ROTANTE)) {
+		estaRotando = false;
+	}
 
 }
+
+
+
 
 void ModuleSceneIntro::CreateTerrain()
 {
@@ -790,8 +716,8 @@ void ModuleSceneIntro::CreateObjects()
 
 
 
-	circuloTL = App->physics->CreateCircle(350, 600, 150, b2_kinematicBody, true);
-	
+	circuloGiratorio = App->physics->CreateCircle(ruletaX, ruletaY, ruletaR, b2_kinematicBody, true);
+	circuloGiratorio->type = PLATAFORMA_ROTANTE;
 
 
 

@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePlayer.h"
+#include "ModulePhysics.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -32,10 +33,18 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
+
+	if (bodyB->type == PLATAFORMA_ROTANTE) {
+		LOG("TA DENTROOOOOO");
+	}
+
 }
 
 void ModulePlayer::OnExitCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
+	if (bodyB->type == PLATAFORMA_ROTANTE) {
+		LOG("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+	}
 }
 
 

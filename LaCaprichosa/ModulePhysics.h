@@ -15,7 +15,8 @@
 enum ColisionType {
 	NO_COLLISION = -1,
 	RESETBALL,
-	BALL
+	BALL,
+	PLATAFORMA_ROTANTE
 };
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
