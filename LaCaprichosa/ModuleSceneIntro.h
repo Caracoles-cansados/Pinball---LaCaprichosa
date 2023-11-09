@@ -40,6 +40,13 @@ public:
 	SDL_Texture* pizzaRuleta_tex;
 	SDL_Texture* bola_tex;
 
+	SDL_Texture* luces1_tex;
+	SDL_Texture* luces2_tex;
+	SDL_Texture* luces3_tex;
+	SDL_Texture* luces4_tex;
+	SDL_Texture* luces5_tex;
+	SDL_Texture* luces6_tex;
+
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
@@ -54,7 +61,7 @@ public:
 	int fuerzaPaleta = -600;
 	int springForce;
 	
-
+	int puntuacionJuego = 0;
 
 	
 	PhysBody* muelleInicio;
@@ -77,4 +84,8 @@ public:
 	int ruletaR = 150;
 	int ruletaForce = 6;
 	int ruletaAngle = 0;
+
+
+	int puntuacionAlTocar = 100;
+
 };
