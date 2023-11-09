@@ -32,6 +32,13 @@ bool ModuleSceneIntro::Start()
 	background_tex = App->textures->Load("textures/background.png");
 	pizzaRuleta_tex = App->textures->Load("textures/pizza_rondante.png");
 	bola_tex = App->textures->Load("textures/bola.png");
+
+	luces1_tex = App->textures->Load("textures/Luces 1.png");
+	luces2_tex = App->textures->Load("textures/Luces 2.png");
+	luces3_tex = App->textures->Load("textures/Luces 3.png");
+	luces4_tex = App->textures->Load("textures/Luces 4.png");
+	luces5_tex = App->textures->Load("textures/Luces 5.png");
+	luces6_tex = App->textures->Load("textures/Luces 6.png");
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 
@@ -162,10 +169,39 @@ update_status ModuleSceneIntro::Update()
 	ruletaAngle += ruletaForce;
 
 	App->renderer->Blit(background_tex, 0, 0);
+
+	//Puntuacion
+	if (puntuacionJuego < 100) {
+		App->renderer->Blit(luces1_tex, 0, 0);
+	}
+	else if (puntuacionJuego >= 100 && puntuacionJuego < 200) {
+		App->renderer->Blit(luces2_tex, 0, 0);
+	}
+	else if (puntuacionJuego >= 200 && puntuacionJuego < 300) {
+		App->renderer->Blit(luces3_tex, 0, 0);
+	}
+	else if (puntuacionJuego >= 300 && puntuacionJuego < 400) {
+		App->renderer->Blit(luces4_tex, 0, 0);
+	}
+	else if (puntuacionJuego >= 400 && puntuacionJuego < 500) {
+		App->renderer->Blit(luces5_tex, 0, 0);
+	}
+	else if (puntuacionJuego >= 500) {
+		App->renderer->Blit(luces6_tex, 0, 0);
+	}
+	
+
+
+
+
 	SDL_Rect pizzaRect = { 0,0,344,337 };
 	App->renderer->Blit(pizzaRuleta_tex, ruletaX-177, ruletaY - 177, &pizzaRect, 1, ruletaAngle);
 	SDL_Rect ballRect = { 0,0,32,32};
 	App->renderer->Blit(bola_tex, posX, posY, &ballRect, 1, bola->body->GetTransform().q.GetAngle());
+
+
+
+
 
 	return UPDATE_CONTINUE;
 }
@@ -182,6 +218,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	if ((bodyA->type == BALL && bodyB->type == PLATAFORMA_ROTANTE)) {
 		estaRotando = true;
+	}
+	if (bodyA->type == BALL && bodyB->type == REBOTADOR) {
+		puntuacionJuego += puntuacionAlTocar;
 	}
 
 }
@@ -632,6 +671,7 @@ void ModuleSceneIntro::CreateObjects()
 	bola = App->physics->CreateBolas(200, 150, 14);
 	bola->body->SetType(b2_staticBody);
 	bola->body->SetFixedRotation(true);
+	bola->type = REBOTADOR;
 	
 
 
@@ -639,14 +679,17 @@ void ModuleSceneIntro::CreateObjects()
 	bola2 = App->physics->CreateBolas(500, 150, 16);
 	bola2->body->SetType(b2_staticBody);
 	bola2->body->SetFixedRotation(true);
+	bola2->type = REBOTADOR;
 
 	bola3 = App->physics->CreateBolas(550, 250, 16);
 	bola3->body->SetType(b2_staticBody);
 	bola3->body->SetFixedRotation(true);
+	bola3->type = REBOTADOR;
 
 	bola4 = App->physics->CreateBolas(450, 300, 16);
 	bola4->body->SetType(b2_staticBody);
 	bola4->body->SetFixedRotation(true);
+	bola4->type = REBOTADOR;
 
 
 	//Muelle inicio
