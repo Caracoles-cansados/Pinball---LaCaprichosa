@@ -195,7 +195,7 @@ update_status ModuleSceneIntro::Update()
 
 
 	SDL_Rect pizzaRect = { 0,0,344,337 };
-	App->renderer->Blit(pizzaRuleta_tex, ruletaX-177, ruletaY - 177, &pizzaRect, 1, ruletaAngle);
+	App->renderer->Blit(pizzaRuleta_tex, ruletaX-177, ruletaY - 177, &pizzaRect, 1, ruletaAngle/3);
 	SDL_Rect ballRect = { 0,0,32,32};
 	App->renderer->Blit(bola_tex, posX, posY, &ballRect, 1, bola->body->GetTransform().q.GetAngle());
 
