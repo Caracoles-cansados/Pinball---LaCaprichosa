@@ -43,6 +43,9 @@ bool ModuleSceneIntro::Start()
 
 	mano_tex = App->textures->Load("textures/MANO.png");
 
+	paletaL_tex = App->textures->Load("textures/paleta2_w.png");
+	paletaR_tex = App->textures->Load("textures/paleta1_w.png");
+
 
 
 
@@ -203,6 +206,13 @@ update_status ModuleSceneIntro::Update()
 	muelleInicio->GetPosition(x, y);
 
 	App->renderer->Blit(mano_tex, 0, y- 825);
+
+	
+	SDL_Rect paletaRect = {0,0, 196 ,36 };
+
+
+	App->renderer->Blit(paletaL_tex, 200 - 70, 785, &paletaRect, 1, paletaIzquierdo->GetRotation(), 70, 18);
+	App->renderer->Blit(paletaR_tex, 500 - 130, 785, &paletaRect, 1, paletaDerecho->GetRotation(), 130, 18);
 
 
 

@@ -50,6 +50,10 @@ public:
 
 	SDL_Texture* mano_tex;
 
+
+	SDL_Texture* paletaL_tex;
+	SDL_Texture* paletaR_tex;
+
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
