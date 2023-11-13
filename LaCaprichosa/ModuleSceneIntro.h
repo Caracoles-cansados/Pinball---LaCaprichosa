@@ -54,6 +54,9 @@ public:
 	SDL_Texture* paletaL_tex;
 	SDL_Texture* paletaR_tex;
 
+
+	SDL_Texture* endMatch_tex;
+
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
@@ -99,5 +102,8 @@ public:
 
 
 	int puntuacionAlTocar = 100;
+
+	int vidas = 3;
+	int yMensajeFin = -100;
 
 };

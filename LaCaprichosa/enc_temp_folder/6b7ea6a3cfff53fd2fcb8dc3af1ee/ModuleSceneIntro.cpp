@@ -90,11 +90,6 @@ bool ModuleSceneIntro::CleanUp()
 	App->physics->GetWorld()->DestroyBody(bola4->body);
 	App->physics->GetWorld()->DestroyBody(muelleInicio->body);
 	App->physics->GetWorld()->DestroyBody(ball->body);
-	App->physics->GetWorld()->DestroyBody(circuloGiratorio->body);
-
-	App->physics->GetWorld()->DestroyBody(rebotadorAbajoL->body);
-	App->physics->GetWorld()->DestroyBody(rebotadorAbajoR->body);
-
 
 
 	return true;
