@@ -252,6 +252,7 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	
 
 
 	return UPDATE_CONTINUE;
@@ -681,7 +682,7 @@ void ModuleSceneIntro::CreateTerrain()
 	colisionPerder->type = RESETBALL;
 	colisionPerder->listener = this;
 
-	/*int champi[60] = {
+	int champi[60] = {
 	356, 417,
 	333, 416,
 	320, 408,
@@ -713,7 +714,7 @@ void ModuleSceneIntro::CreateTerrain()
 	382, 413,
 	371, 417
 	};
-	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);*/
+	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);
 	
 
 }
