@@ -240,6 +240,17 @@ update_status ModuleSceneIntro::Update()
 		}
 			
 	}
+	else {
+		if (vidas >= 1) {
+			App->renderer->Blit(bola_tex, 0, 860);
+		} 
+		if (vidas >= 2) {
+			App->renderer->Blit(bola_tex, 0, 830);
+		}
+		if (vidas >= 3) {
+			App->renderer->Blit(bola_tex, 0, 800);
+		}
+	}
 
 
 
