@@ -75,6 +75,11 @@ public:
 	PhysBody* bola4;
 
 
+	PhysBody* rebotadorAbajoL;
+	PhysBody* rebotadorAbajoR;
+
+
+
 
 
 	PhysBody* circuloGiratorio;

@@ -17,7 +17,9 @@ enum ColisionType {
 	RESETBALL,
 	BALL,
 	PLATAFORMA_ROTANTE,
-	REBOTADOR
+	REBOTADOR,
+	REBOTADOR_DE_MUELLE,
+	REBOTADOR_DE_MUELLE2
 };
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
@@ -55,6 +57,7 @@ public:
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type = b2BodyType::b2_dynamicBody, bool sensor = false);
 	PhysBody* CreateBolas(int x, int y, int radius);
+	PhysBody* CreateFullBolas(int x, int y, int radius);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type = b2BodyType::b2_dynamicBody);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type = b2BodyType::b2_dynamicBody);

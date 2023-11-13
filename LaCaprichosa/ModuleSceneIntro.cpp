@@ -50,7 +50,8 @@ bool ModuleSceneIntro::Start()
 	
 
 
-	ball = App->physics->CreateCircle(672, 700, 15);
+	//ball = App->physics->CreateCircle(672, 700, 15);
+	ball = App->physics->CreateCircle(155, 700, 15);
 	ball->listener = this;
 	ball->type = BALL;
 	
@@ -225,6 +226,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA->type == BALL && bodyB->type == REBOTADOR) {
 		puntuacionJuego += puntuacionAlTocar;
 	}
+	if (bodyA->type == BALL && bodyB->type == REBOTADOR_DE_MUELLE) {
+		ball->body->ApplyLinearImpulse(b2Vec2(0, -20), ball->body->GetWorldCenter(), true);
+	}
+	if (bodyA->type == BALL && bodyB->type == REBOTADOR_DE_MUELLE2) {
+		ball->body->ApplyLinearImpulse(b2Vec2(0, -12), ball->body->GetWorldCenter(), true);
+	}
+
 
 }
 void ModuleSceneIntro::OnExitCollision(PhysBody* bodyA, PhysBody* bodyB)
@@ -622,9 +630,10 @@ void ModuleSceneIntro::CreateTerrain()
 
 	//Para el reset de la bola
 	PhysBody* colisionPerder = App->physics->CreateRectangleSensor(450, 910, 900, 20);
+	colisionPerder->type = RESETBALL;
+	colisionPerder->listener = this;
 
-
-	int champi[60] = {
+	/*int champi[60] = {
 	356, 417,
 	333, 416,
 	320, 408,
@@ -656,9 +665,8 @@ void ModuleSceneIntro::CreateTerrain()
 	382, 413,
 	371, 417
 	};
-	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);
-	colisionPerder->type = RESETBALL;
-	colisionPerder->listener = this;
+	App->physics->CreateChain(0, 0, champi, 60, b2_staticBody);*/
+	
 
 }
 
@@ -693,6 +701,17 @@ void ModuleSceneIntro::CreateObjects()
 	bola4->body->SetType(b2_staticBody);
 	bola4->body->SetFixedRotation(true);
 	bola4->type = REBOTADOR;
+
+
+	rebotadorAbajoL = App->physics->CreateRectangleSensor(125, 800, 22, 16);
+	rebotadorAbajoL->body->SetType(b2_staticBody);
+	rebotadorAbajoL->body->SetFixedRotation(true);
+	rebotadorAbajoL->type = REBOTADOR_DE_MUELLE2;
+
+	rebotadorAbajoR = App->physics->CreateRectangleSensor(570, 800, 22, 16);
+	rebotadorAbajoR->body->SetType(b2_staticBody);
+	rebotadorAbajoR->body->SetFixedRotation(true);
+	rebotadorAbajoR->type = REBOTADOR_DE_MUELLE;
 
 
 	//Muelle inicio
