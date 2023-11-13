@@ -18,7 +18,7 @@ ModuleFadeToBlack::ModuleFadeToBlack(Application* app, bool start_enabled) : Mod
 
 
 	fadeIn.PushBack({ 0, 0, 320, 242 });
-	fadeIn.PushBack({ 0,	242, 320, 242 });
+	fadeIn.PushBack({ 0, 242, 320, 242 });
 	fadeIn.PushBack({ 0, 484, 320, 242 });
 	fadeIn.PushBack({ 0, 726, 320, 242 });
 	fadeIn.PushBack({ 0, 726, 320, 242 });

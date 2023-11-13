@@ -47,7 +47,8 @@ bool ModuleMenu::Start()
 
 	bool ret = true;
 	////textureBackground2 = App->textures->Load("Assets/Interface/Menu/fondo.png");
-	//textureBackground = App->textures->Load("Assets/Interface/Menu/intro.png");
+	
+	textureBackground = App->textures->Load("textures/blanco.png");
 	//Mix_HaltMusic();
 
 	App->renderer->camera.x = 0;
@@ -63,7 +64,7 @@ update_status ModuleMenu::Update()
 {
 
 
-	
+	App->renderer->Blit(textureBackground, 0, 0);
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		
