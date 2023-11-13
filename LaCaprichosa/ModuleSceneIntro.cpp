@@ -41,6 +41,8 @@ bool ModuleSceneIntro::Start()
 	luces6_tex = App->textures->Load("textures/Luces 6.png");
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
+	mano_tex = App->textures->Load("textures/MANO.png");
+
 
 
 
@@ -191,14 +193,15 @@ update_status ModuleSceneIntro::Update()
 	}
 	
 
-
-
-
 	SDL_Rect pizzaRect = { 0,0,344,337 };
 	App->renderer->Blit(pizzaRuleta_tex, ruletaX-177, ruletaY - 177, &pizzaRect, 1, ruletaAngle/3);
 	SDL_Rect ballRect = { 0,0,32,32};
 	App->renderer->Blit(bola_tex, posX, posY, &ballRect, 1, bola->body->GetTransform().q.GetAngle());
 
+	int x, y;
+	muelleInicio->GetPosition(x, y);
+
+	App->renderer->Blit(mano_tex, 0, y- 825);
 
 
 

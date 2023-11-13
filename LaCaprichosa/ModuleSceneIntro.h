@@ -47,6 +47,9 @@ public:
 	SDL_Texture* luces5_tex;
 	SDL_Texture* luces6_tex;
 
+
+	SDL_Texture* mano_tex;
+
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
