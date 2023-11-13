@@ -8,10 +8,13 @@ class ModuleRender;
 class ModuleWindow;
 class ModuleTextures;
 class ModuleInput;
+class ModuleMenu;
 class ModuleAudio;
 class ModulePlayer;
 class ModuleSceneIntro;
 class ModulePhysics;
+class ModuleFadeToBlack;
+
 
 class Application
 {
@@ -20,10 +23,12 @@ public:
 	ModuleWindow* window;
 	ModuleTextures* textures;
 	ModuleInput* input;
+	ModuleMenu* menu;
 	ModuleAudio* audio;
 	ModulePlayer* player;
 	ModuleSceneIntro* scene_intro;
 	ModulePhysics* physics;
+	ModuleFadeToBlack* fade;
 
 private:
 
