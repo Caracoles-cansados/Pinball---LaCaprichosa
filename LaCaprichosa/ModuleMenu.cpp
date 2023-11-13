@@ -48,7 +48,7 @@ bool ModuleMenu::Start()
 	bool ret = true;
 	////textureBackground2 = App->textures->Load("Assets/Interface/Menu/fondo.png");
 	
-	textureBackground = App->textures->Load("textures/blanco.png");
+	textureBackground = App->textures->Load("textures/Menu Inicio.png");
 	//Mix_HaltMusic();
 
 	App->renderer->camera.x = 0;

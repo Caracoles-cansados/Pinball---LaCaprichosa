@@ -50,8 +50,8 @@ bool ModuleSceneIntro::Start()
 	
 
 
-	//ball = App->physics->CreateCircle(672, 700, 15);
-	ball = App->physics->CreateCircle(155, 700, 15);
+	ball = App->physics->CreateCircle(672, 700, 15);
+	
 	ball->listener = this;
 	ball->type = BALL;
 	
