@@ -16,9 +16,5 @@ public:
 	bool CleanUp();
 
 public:
-	uint PPSound1;
-	uint PPSound2;
-	uint PPSound3;
-	uint PPSound4;
-	uint PPSound5;
+	
 };

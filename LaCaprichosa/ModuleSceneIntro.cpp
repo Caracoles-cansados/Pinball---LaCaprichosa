@@ -30,7 +30,6 @@ bool ModuleSceneIntro::Start()
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	background_tex = App->textures->Load("textures/background.png");
 	pizzaRuleta_tex = App->textures->Load("textures/pizza_rondante.png");
 	bola_tex = App->textures->Load("textures/bola.png");
@@ -51,7 +50,16 @@ bool ModuleSceneIntro::Start()
 
 	endMatch_tex = App->textures->Load("textures/Fin.png");
 
+	PPSound1 = App->audio->LoadFx("audio/PP1.wav");
+	PPSound2 = App->audio->LoadFx("audio/PP2.wav");
+	PPSound3 = App->audio->LoadFx("audio/PP3.wav");
+	PPSound4 = App->audio->LoadFx("audio/PP4.wav");
+	PPSound5 = App->audio->LoadFx("audio/PP5.wav");
 
+	MMMSound = App->audio->LoadFx("audio/MamaMiaMuelle.wav");
+	MuelleSound = App->audio->LoadFx("audio/Muelle.wav");
+	
+	App->audio->PlayMusic("audio/music.ogg", 1.0f);
 
 
 	// Pivot 0, 0
@@ -155,10 +163,11 @@ update_status ModuleSceneIntro::Update()
 			paletaDerecho->body->ApplyForceToCenter(b2Vec2(0, fuerzaPaleta), 1);
 		}
 
-
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+			App->audio->PlayFx(MuelleSound);
+		}
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
 			//paletaInicio->body->ApplyForceToCenter(b2Vec2(0, fuerzaPaleta), 1);
-
 
 			if (springForce < 900) {
 				springForce += 10;
@@ -169,6 +178,7 @@ update_status ModuleSceneIntro::Update()
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
 			springForce = 0;
+			App->audio->PlayFx(MMMSound);
 		}
 
 
@@ -262,7 +272,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	App->audio->PlayFx(bonus_fx);
+	
 
 	
 	if ((bodyA->type == BALL && bodyB->type == RESETBALL) || (bodyA->type == RESETBALL  && bodyB->type == BALL)) {
@@ -274,6 +284,23 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	if (bodyA->type == BALL && bodyB->type == REBOTADOR) {
 		puntuacionJuego += puntuacionAlTocar;
+	
+		switch (puntuacionJuego)
+		{
+		case 100:
+			App->audio->PlayFx(PPSound1);
+		case 200:
+			App->audio->PlayFx(PPSound2);
+		case 300:
+			App->audio->PlayFx(PPSound3);
+		case 400:
+			App->audio->PlayFx(PPSound4);
+		case 500:
+			App->audio->PlayFx(PPSound5);
+
+		default:
+			App->audio->PlayFx(PPSound1);
+		}
 	}
 	if (bodyA->type == BALL && bodyB->type == REBOTADOR_DE_MUELLE) {
 		ball->body->ApplyLinearImpulse(b2Vec2(0, -20), ball->body->GetWorldCenter(), true);
@@ -288,7 +315,7 @@ void ModuleSceneIntro::OnExitCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	App->audio->PlayFx(bonus_fx);
+	
 
 
 	if ((bodyA->type == BALL && bodyB->type == PLATAFORMA_ROTANTE)) {

@@ -106,4 +106,12 @@ public:
 	int vidas = 3;
 	int yMensajeFin = -100;
 
+	uint PPSound1;
+	uint PPSound2;
+	uint PPSound3;
+	uint PPSound4;
+	uint PPSound5;
+
+	uint MMMSound;
+	uint MuelleSound;
 };
