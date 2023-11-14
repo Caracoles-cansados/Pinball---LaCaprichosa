@@ -73,6 +73,7 @@ bool ModuleSceneIntro::Start()
 	
 	
 	vidas = 3;
+	puntuacionJuego = 0;
 
 	
 	CreateTerrain();
