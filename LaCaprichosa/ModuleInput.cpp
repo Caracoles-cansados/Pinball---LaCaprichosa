@@ -4,6 +4,7 @@
 
 #include "SDL\include\SDL.h"
 
+
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	keyboard = new KEY_STATE[MAX_KEYS];
@@ -37,7 +38,7 @@ bool ModuleInput::Init()
 update_status ModuleInput::PreUpdate()
 {
 	SDL_PumpEvents();
-
+	static SDL_Event event;
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	
 	for(int i = 0; i < MAX_KEYS; ++i)
@@ -83,6 +84,38 @@ update_status ModuleInput::PreUpdate()
 	if(keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;
 
+	while (SDL_PollEvent(&event) != 0)
+	{
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			windowEvents[WE_QUIT] = true;
+			break;
+
+		case SDL_WINDOWEVENT:
+			switch (event.window.event)
+			{
+				//case SDL_WINDOWEVENT_LEAVE:
+			case SDL_WINDOWEVENT_HIDDEN:
+			case SDL_WINDOWEVENT_MINIMIZED:
+			case SDL_WINDOWEVENT_FOCUS_LOST:
+				windowEvents[WE_HIDE] = true;
+				break;
+
+				//case SDL_WINDOWEVENT_ENTER:
+			case SDL_WINDOWEVENT_SHOWN:
+			case SDL_WINDOWEVENT_FOCUS_GAINED:
+			case SDL_WINDOWEVENT_MAXIMIZED:
+			case SDL_WINDOWEVENT_RESTORED:
+				windowEvents[WE_SHOW] = true;
+				break;
+			}
+			break;
+
+		
+		}
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -92,4 +125,9 @@ bool ModuleInput::CleanUp()
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+bool ModuleInput::GetWindowEvent(EventWindow ev)
+{
+	return windowEvents[ev];
 }

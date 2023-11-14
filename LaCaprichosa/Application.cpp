@@ -95,6 +95,10 @@ update_status Application::Update()
 	update_status ret = UPDATE_CONTINUE;
 	p2List_item<Module*>* item = list_modules.getFirst();
 
+
+	if (input->GetWindowEvent(WE_QUIT) == true)
+		ret = UPDATE_STOP;
+
 	while(item != NULL && ret == UPDATE_CONTINUE)
 	{
 		if(item->data->IsEnabled())
