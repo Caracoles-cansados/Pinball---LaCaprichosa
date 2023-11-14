@@ -178,7 +178,9 @@ update_status ModuleSceneIntro::Update()
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) {
 			springForce = 0;
+			App->audio->StopFx();
 			App->audio->PlayFx(MMMSound);
+			
 		}
 
 
