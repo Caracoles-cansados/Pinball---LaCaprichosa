@@ -79,6 +79,7 @@ bool ModuleSceneIntro::Start()
 	
 	vidas = 3;
 	puntuacionJuego = 0;
+	puntuacionTotal = 0;
 
 	
 	CreateTerrain();
@@ -249,26 +250,6 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(paletaR_tex, 500 - 130, 785, &paletaRect, 1, paletaDerecho->GetRotation(), 130, 18);
 
 
-	if (vidas <= 0) {
-		App->renderer->Blit(endMatch_tex, 0,0);
-
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
-			App->fade->FadeToBlack(App->scene_intro, App->menu, 20);
-		
-		}
-			
-	}
-	else {
-		if (vidas >= 1) {
-			App->renderer->Blit(bola_tex, 0, 860);
-		} 
-		if (vidas >= 2) {
-			App->renderer->Blit(bola_tex, 0, 830);
-		}
-		if (vidas >= 3) {
-			App->renderer->Blit(bola_tex, 0, 800);
-		}
-	}
 
 
 	if (puntuacionTotal > 99) {
@@ -276,7 +257,7 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	int leftDigit, rightDigit;
-	leftDigit = (int) puntuacionTotal / 10;
+	leftDigit = (int)puntuacionTotal / 10;
 	rightDigit = puntuacionTotal - (leftDigit * 10);
 
 	SDL_Rect leftDigit_rect, rightDigit_rect;
@@ -320,7 +301,7 @@ update_status ModuleSceneIntro::Update()
 	switch (rightDigit)
 	{
 	case 0:
-		rightDigit_rect = { 400,100,75,55 };
+		rightDigit_rect = { 400,100,75,75 };
 		break;
 	case 1:
 		rightDigit_rect = { 0,0,75,75 };
@@ -355,9 +336,45 @@ update_status ModuleSceneIntro::Update()
 	}
 
 
-	App->renderer->Blit(numerosPuntuaciones, 700, 380, &leftDigit_rect);
-	App->renderer->Blit(numerosPuntuaciones, 755, 380, &rightDigit_rect);
 
+
+
+
+
+
+
+
+
+
+	if (vidas <= 0) {
+		App->renderer->Blit(endMatch_tex, 0,0);
+
+		App->renderer->Blit(numerosPuntuaciones, 370, 680, &leftDigit_rect);
+		App->renderer->Blit(numerosPuntuaciones, 425, 680, &rightDigit_rect);
+
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+			App->fade->FadeToBlack(App->scene_intro, App->menu, 20);
+		
+		}
+			
+	}
+	else {
+		if (vidas >= 1) {
+			App->renderer->Blit(bola_tex, 0, 860);
+		} 
+		if (vidas >= 2) {
+			App->renderer->Blit(bola_tex, 0, 830);
+		}
+		if (vidas >= 3) {
+			App->renderer->Blit(bola_tex, 0, 800);
+		}
+		App->renderer->Blit(numerosPuntuaciones, 700, 380, &leftDigit_rect);
+		App->renderer->Blit(numerosPuntuaciones, 755, 380, &rightDigit_rect);
+
+	}
+
+
+	
 
 	
 
