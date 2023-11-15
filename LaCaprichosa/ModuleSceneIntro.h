@@ -57,6 +57,10 @@ public:
 
 	SDL_Texture* endMatch_tex;
 
+
+	SDL_Texture* numerosPuntuaciones;
+
+
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
@@ -72,6 +76,7 @@ public:
 	int springForce;
 	
 	int puntuacionJuego = 0;
+	int puntuacionTotal = 0;
 
 	
 	PhysBody* muelleInicio;

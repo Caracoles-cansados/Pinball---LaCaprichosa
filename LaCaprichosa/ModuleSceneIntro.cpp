@@ -48,6 +48,9 @@ bool ModuleSceneIntro::Start()
 	paletaR_tex = App->textures->Load("textures/paleta1_w.png");
 
 
+	numerosPuntuaciones = App->textures->Load("textures/numeros_medianos.png");
+
+
 	endMatch_tex = App->textures->Load("textures/Fin.png");
 
 	PPSound1 = App->audio->LoadFx("audio/PP1.wav");
@@ -60,6 +63,8 @@ bool ModuleSceneIntro::Start()
 	MuelleSound = App->audio->LoadFx("audio/Muelle.wav");
 	
 	App->audio->PlayMusic("audio/music.ogg", 1.0f);
+
+
 
 
 	// Pivot 0, 0
@@ -265,6 +270,95 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+
+	if (puntuacionTotal > 99) {
+		puntuacionTotal = 99;
+	}
+
+	int leftDigit, rightDigit;
+	leftDigit = (int) puntuacionTotal / 10;
+	rightDigit = puntuacionTotal - (leftDigit * 10);
+
+	SDL_Rect leftDigit_rect, rightDigit_rect;
+
+	switch (leftDigit)
+	{
+	case 0:
+		leftDigit_rect = { 400,100,75,75 };
+		break;
+	case 1:
+		leftDigit_rect = { 0,0,75,75 };
+		break;
+	case 2:
+		leftDigit_rect = { 100,0,75,75 };
+		break;
+	case 3:
+		leftDigit_rect = { 200,0,75,75 };
+		break;
+	case 4:
+		leftDigit_rect = { 300,0,75,75 };
+		break;
+	case 5:
+		leftDigit_rect = { 400,0,75,75 };
+		break;
+	case 6:
+		leftDigit_rect = { 0,100,75,75 };
+		break;
+	case 7:
+		leftDigit_rect = { 100,100,75,75 };
+		break;
+	case 8:
+		leftDigit_rect = { 200,100,75,75 };
+		break;
+	case 9:
+		leftDigit_rect = { 300,100,75,75 };
+		break;
+
+	default:
+		break;
+	}
+	switch (rightDigit)
+	{
+	case 0:
+		rightDigit_rect = { 400,100,75,55 };
+		break;
+	case 1:
+		rightDigit_rect = { 0,0,75,75 };
+		break;
+	case 2:
+		rightDigit_rect = { 100,0,75,75 };
+		break;
+	case 3:
+		rightDigit_rect = { 200,0,75,75 };
+		break;
+	case 4:
+		rightDigit_rect = { 300,0,75,75 };
+		break;
+	case 5:
+		rightDigit_rect = { 400,0,75,75 };
+		break;
+	case 6:
+		rightDigit_rect = { 0,100,75,75 };
+		break;
+	case 7:
+		rightDigit_rect = { 100,100,75,75 };
+		break;
+	case 8:
+		rightDigit_rect = { 200,100,75,75 };
+		break;
+	case 9:
+		rightDigit_rect = { 300,100,75,75 };
+		break;
+
+	default:
+		break;
+	}
+
+
+	App->renderer->Blit(numerosPuntuaciones, 700, 380, &leftDigit_rect);
+	App->renderer->Blit(numerosPuntuaciones, 755, 380, &rightDigit_rect);
+
+
 	
 
 
@@ -291,15 +385,20 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		switch (puntuacionJuego)
 		{
 		case 100:
-			App->audio->PlayFx(PPSound1);
+			App->audio->PlayFx(PPSound1); break;
 		case 200:
-			App->audio->PlayFx(PPSound2);
+			App->audio->PlayFx(PPSound2); break;
 		case 300:
-			App->audio->PlayFx(PPSound3);
+			App->audio->PlayFx(PPSound3); break;
 		case 400:
-			App->audio->PlayFx(PPSound4);
+			App->audio->PlayFx(PPSound4); break;
 		case 500:
-			App->audio->PlayFx(PPSound5);
+			App->audio->PlayFx(PPSound5); break;
+			
+		case 600:
+			puntuacionTotal += 1;
+			puntuacionJuego = 0;
+			break;
 
 		default:
 			App->audio->PlayFx(PPSound1);
