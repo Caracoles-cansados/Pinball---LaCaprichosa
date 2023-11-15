@@ -55,6 +55,8 @@ bool ModuleMenu::Start()
 	App->renderer->camera.y = 0;
 
 	
+	App->audio->PlayMusic("audio/music.ogg", 1.0f);
+
 	//currentAnimation = &backgroundAnim;
 
 	return ret;
