@@ -59,7 +59,7 @@ bool ModuleSceneIntro::Start()
 	PPSound4 = App->audio->LoadFx("audio/PP4.wav");
 	PPSound5 = App->audio->LoadFx("audio/PP5.wav");
 	Reset = App->audio->LoadFx("audio/Reset.wav");
-	Punto = App->audio->LoadFx("audio/Punto.wav");
+	Punto = App->audio->LoadFx("audio/Punto3.wav");
 
 	MMMSound = App->audio->LoadFx("audio/MamaMiaMuelle.wav");
 	MuelleSound = App->audio->LoadFx("audio/Muelle.wav");
@@ -412,7 +412,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			App->audio->PlayFx(PPSound5); break;
 			
 		case 600:
-			//App->audio->PlayFx(Punto);
+			App->audio->PlayFx(Punto);
 			puntuacionTotal += 1;
 			puntuacionJuego = 0;
 			break;

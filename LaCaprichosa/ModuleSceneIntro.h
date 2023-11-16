@@ -106,7 +106,7 @@ public:
 	int ruletaAngle = 0;
 
 
-	int puntuacionAlTocar = 100;
+	int puntuacionAlTocar = 600;
 
 	int vidas = 3;
 	int yMensajeFin = -100;
