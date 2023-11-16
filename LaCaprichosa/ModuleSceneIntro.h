@@ -119,4 +119,6 @@ public:
 
 	uint MMMSound;
 	uint MuelleSound;
+	uint Reset;
+	uint Punto;
 };

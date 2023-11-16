@@ -58,6 +58,8 @@ bool ModuleSceneIntro::Start()
 	PPSound3 = App->audio->LoadFx("audio/PP3.wav");
 	PPSound4 = App->audio->LoadFx("audio/PP4.wav");
 	PPSound5 = App->audio->LoadFx("audio/PP5.wav");
+	Reset = App->audio->LoadFx("audio/Reset.wav");
+	Punto = App->audio->LoadFx("audio/Punto.wav");
 
 	MMMSound = App->audio->LoadFx("audio/MamaMiaMuelle.wav");
 	MuelleSound = App->audio->LoadFx("audio/Muelle.wav");
@@ -386,12 +388,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	
-
-	
 	if ((bodyA->type == BALL && bodyB->type == RESETBALL) || (bodyA->type == RESETBALL  && bodyB->type == BALL)) {
 		crearBola = true;
-		
+		App->audio->PlayFx(Reset);
 	}
 	if ((bodyA->type == BALL && bodyB->type == PLATAFORMA_ROTANTE)) {
 		estaRotando = true;
@@ -413,6 +412,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			App->audio->PlayFx(PPSound5); break;
 			
 		case 600:
+			//App->audio->PlayFx(Punto);
 			puntuacionTotal += 1;
 			puntuacionJuego = 0;
 			break;
@@ -427,7 +427,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA->type == BALL && bodyB->type == REBOTADOR_DE_MUELLE2) {
 		ball->body->ApplyLinearImpulse(b2Vec2(0, -12), ball->body->GetWorldCenter(), true);
 	}
-
 
 }
 void ModuleSceneIntro::OnExitCollision(PhysBody* bodyA, PhysBody* bodyB)
