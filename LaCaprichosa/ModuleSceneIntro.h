@@ -121,4 +121,5 @@ public:
 	uint MuelleSound;
 	uint Reset;
 	uint Punto;
+	uint golpeoPaleta_Audio;
 };

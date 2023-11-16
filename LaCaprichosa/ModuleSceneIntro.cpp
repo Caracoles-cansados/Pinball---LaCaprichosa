@@ -63,6 +63,8 @@ bool ModuleSceneIntro::Start()
 
 	MMMSound = App->audio->LoadFx("audio/MamaMiaMuelle.wav");
 	MuelleSound = App->audio->LoadFx("audio/Muelle.wav");
+
+	golpeoPaleta_Audio = App->audio->LoadFx("audio/golpeoPaleta.wav");
 	
 	App->audio->PlayMusic("audio/music.ogg", 1.0f);
 
@@ -171,6 +173,12 @@ update_status ModuleSceneIntro::Update()
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
 			paletaDerecho->body->ApplyForceToCenter(b2Vec2(0, fuerzaPaleta), 1);
 		}
+
+
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) {
+			App->audio->PlayFx(golpeoPaleta_Audio);
+		}
+
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 			App->audio->PlayFx(MuelleSound);
