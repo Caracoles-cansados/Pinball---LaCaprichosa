@@ -84,6 +84,8 @@ bool ModuleSceneIntro::Start()
 	vidas = 3;
 	puntuacionJuego = 0;
 	puntuacionTotal = 0;
+	gravityScale = 1;
+	bounceCoefficient = 0;
 
 	
 	CreateTerrain();
@@ -124,6 +126,8 @@ update_status ModuleSceneIntro::Update()
 {
 	int posX, posY;
 	ball->GetPosition(posX, posY);
+	ball->body->SetGravityScale(gravityScale);
+	ball->body->GetFixtureList()[0].SetRestitution(bounceCoefficient);
 	if (vidas > 0) {
 		if (estaRotando) {
 
@@ -213,6 +217,42 @@ update_status ModuleSceneIntro::Update()
 			ball->type = BALL;
 			ball->body->SetFixedRotation(false);
 		}
+
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+			if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+				gravityScale += 1;
+			}
+			else {
+				gravityScale += 0.1f;
+			}
+			
+		}
+		if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+			if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+				gravityScale -= 1;
+			}
+			else {
+				gravityScale -= 0.1f;
+			}
+		}
+		gravityScale = max(gravityScale, 0);
+
+
+		if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+			
+			bounceCoefficient += 0.1f;
+			
+
+		}
+		if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
+			
+			bounceCoefficient -= 0.1f;
+			
+		}
+		bounceCoefficient = max(bounceCoefficient, 0);
+		bounceCoefficient = min(bounceCoefficient, 1);
+		
+
 	}
 	
 

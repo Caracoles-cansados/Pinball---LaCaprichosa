@@ -122,4 +122,12 @@ public:
 	uint Reset;
 	uint Punto;
 	uint golpeoPaleta_Audio;
+
+
+
+	float gravityScale = 1;
+	float bounceCoefficient = 0;
+
+
+
 };
