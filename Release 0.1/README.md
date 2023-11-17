@@ -23,9 +23,18 @@ You have 3 lives, and every 6 thermometer points (hit the pepperoni) you get a t
  - LEFT ARROW - Move the left flipper
  - RIGHT ARROW - Move the right flipper
  - SPACE - Confirm/Start Game
+ - P - Reset Ball
  - ESC - Close Game
 
 
 ### Debug Controls
 
  - F1 - Toggle Debug mode
+ - F2 - Increase gravity scaler
+ - F2 + LEFT SHIFT - Increase gravity scaler * 10
+ - F3 - Decrease gravity scaler
+ - F3 + LEFT SHIFT - Decrease gravity scaler * 10
+ - F4 - Increase bouncing factor
+ - F5 - Decrease bouncing factor
+ - F6 - Increase life in 1 (max:3)
+ - LEFT_CLICK On ball with Debug mode - Active the mouse joint

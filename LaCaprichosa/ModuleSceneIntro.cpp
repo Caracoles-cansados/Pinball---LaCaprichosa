@@ -118,6 +118,11 @@ bool ModuleSceneIntro::CleanUp()
 
 
 
+
+
+
+
+
 	return true;
 }
 
@@ -128,6 +133,9 @@ update_status ModuleSceneIntro::Update()
 	ball->GetPosition(posX, posY);
 	ball->body->SetGravityScale(gravityScale);
 	ball->body->GetFixtureList()[0].SetRestitution(bounceCoefficient);
+
+
+
 	if (vidas > 0) {
 		if (estaRotando) {
 
@@ -251,6 +259,15 @@ update_status ModuleSceneIntro::Update()
 		}
 		bounceCoefficient = max(bounceCoefficient, 0);
 		bounceCoefficient = min(bounceCoefficient, 1);
+
+		if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
+			vidas++;
+			vidas = min(vidas, 3);
+		}
+
+
+		
+
 		
 
 	}
@@ -916,17 +933,10 @@ void ModuleSceneIntro::CreateObjects()
 {
 
 
-
-
-
-
-
 	bola = App->physics->CreateBolas(200, 150, 14);
 	bola->body->SetType(b2_staticBody);
 	bola->body->SetFixedRotation(true);
 	bola->type = REBOTADOR;
-	
-
 
 
 	bola2 = App->physics->CreateBolas(500, 150, 16);
@@ -1043,6 +1053,7 @@ void ModuleSceneIntro::CreateObjects()
 
 
 }
+
 
 
 

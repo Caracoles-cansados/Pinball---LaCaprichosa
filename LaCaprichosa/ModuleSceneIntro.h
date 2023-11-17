@@ -3,6 +3,8 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "ModulePhysics.h"
+
 
 class PhysBody;
 
@@ -22,6 +24,7 @@ public:
 
 	void CreateTerrain();
 	void CreateObjects();
+
 
 
 public:
@@ -89,6 +92,8 @@ public:
 
 	PhysBody* rebotadorAbajoL;
 	PhysBody* rebotadorAbajoR;
+
+
 
 
 
